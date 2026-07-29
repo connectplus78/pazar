@@ -1,15 +1,100 @@
 {
-    "son_güncelleme": "29-07-2026 16:10:15",
+    "son_güncelleme": "29-07-2026 16:12:48",
     "items": [
         {
+            "symbol": "DOLAR",
+            "price": "47.39",
+            "change": "+%0.05"
+        },
+        {
+            "symbol": "EURO",
+            "price": "53.93",
+            "change": "-%0.02"
+        },
+        {
+            "symbol": "STERLİN",
+            "price": "62.97",
+            "change": "+%0.03"
+        },
+        {
+            "symbol": "İSVİÇRE FRANGI",
+            "price": "57.83",
+            "change": "+%0.10"
+        },
+        {
+            "symbol": "KANADA DOLARI",
+            "price": "33.60",
+            "change": "-%0.04"
+        },
+        {
+            "symbol": "AVUSTRALYA DOLARI",
+            "price": "33.05",
+            "change": "+%0.08"
+        },
+        {
+            "symbol": "SUUDİ RİYALİ",
+            "price": "12.64",
+            "change": "%0.00"
+        },
+        {
+            "symbol": "RUS RUBLESİ",
+            "price": "0.60",
+            "change": "-%0.15"
+        },
+        {
+            "symbol": "ÇİN YUANI",
+            "price": "6.99",
+            "change": "+%0.02"
+        },
+        {
+            "symbol": "EUR/USD",
+            "price": "0.8787",
+            "change": "-%0.03"
+        },
+        {
+            "symbol": "USD/JPY",
+            "price": "163.83",
+            "change": "-%0.05"
+        },
+        {
+            "symbol": "ONS ALTIN",
+            "price": "2,410.00",
+            "change": "+%0.42"
+        },
+        {
+            "symbol": "GRAM ALTIN",
+            "price": "3,671.64",
+            "change": "+%0.35"
+        },
+        {
+            "symbol": "ÇEYREK ALTIN",
+            "price": "6,778.77",
+            "change": "+%0.35"
+        },
+        {
+            "symbol": "YARIM ALTIN",
+            "price": "13,557.54",
+            "change": "+%0.35"
+        },
+        {
+            "symbol": "ATA ALTIN",
+            "price": "27,115.08",
+            "change": "+%0.35"
+        },
+        {
+            "symbol": "GRAM GÜMÜŞ",
+            "price": "33.20",
+            "change": "+%0.23"
+        },
+        {
             "symbol": "BİTCOİN",
-            "price": "63,898.00",
-            "change": "+%0.18"
+            "price": "63,893.00",
+            "change": "+%0.20"
         },
         {
             "symbol": "ETER",
-            "price": "1,890.21",
-            "change": "%-1.31"
+            "price": "1,890.29",
+            "change": "%-1.24"
         },
         {
             "symbol": "ONS GÜMÜŞ",

@@ -8,13 +8,16 @@ def update_market_data():
 
     items = []
 
-    # Canlı Serbest Piyasa Verileri (GenelPara API)
+    # 1. Canlı Döviz ve Altın Verileri (GenelPara API)
     try:
         response = requests.get("https://api.genelpara.com/json/", timeout=10)
+        print("API Yanıt Kodu:", response.status_code)
+        
         if response.status_code == 200:
             data = response.json()
+            print("API Verisi Alındı.")
             
-            # Majör ve Tüm Popüler Dövizler
+            # Majör Dövizler
             if "USD" in data:
                 items.append({"symbol": "DOLAR", "price": str(data["USD"].get("satis", "0")), "change": f"%{data['USD'].get('degisim', '0')}"})
             if "EUR" in data:
@@ -44,7 +47,7 @@ def update_market_data():
             if "EURGBP" in data:
                 items.append({"symbol": "EUR/GBP", "price": str(data["EURGBP"].get("satis", "0")), "change": f"%{data['EURGBP'].get('degisim', '0')}"})
 
-            # Altın ve Gümüş Türleri
+            # Altın Türleri
             if "ONS" in data:
                 items.append({"symbol": "ONS ALTIN", "price": str(data["ONS"].get("satis", "0")), "change": f"%{data['ONS'].get('degisim', '0')}"})
             if "GA" in data:
@@ -57,13 +60,14 @@ def update_market_data():
                 items.append({"symbol": "ATA ALTIN", "price": str(data["ATA"].get("satis", "0")), "change": f"%{data['ATA'].get('degisim', '0')}"})
             if "GUMUS" in data:
                 items.append({"symbol": "GRAM GÜMÜŞ", "price": str(data["GUMUS"].get("satis", "0")), "change": f"%{data['GUMUS'].get('degisim', '0')}"})
-                
+        else:
+            print("GenelPara API HTTP Hatası döndürdü.")
     except Exception as e:
-        print(f"Piyasa verisi çekme hatası: {e}")
+        print(f"GenelPara API kritik hata: {e}")
 
-    # Canlı Kripto Paralar (CoinGecko API)
+    # 2. Canlı Kripto Paralar (CoinGecko API)
     try:
-        response_crypto = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,ripple,binancecoin&vs_currencies=usd&include_24hr_change=true", timeout=10)
+        response_crypto = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true", timeout=10)
         if response_crypto.status_code == 200:
             c_data = response_crypto.json()
             
@@ -76,7 +80,7 @@ def update_market_data():
     except Exception as e:
         print(f"Kripto hatası: {e}")
 
-    # Borsa ve Emtialar
+    # 3. Borsa ve Emtialar
     items.extend([
         {"symbol": "ONS GÜMÜŞ", "price": "31.50", "change": "+%0.19"},
         {"symbol": "HAM PETROL", "price": "78.50", "change": "+%0.85"},
@@ -94,7 +98,7 @@ def update_market_data():
     with open("markets.json", "w", encoding="utf-8") as f:
         json.dump(veriler, f, ensure_ascii=False, indent=4)
     
-    print(f"[{tarih_str}] Tüm döviz ve emtialar güncellendi.")
+    print(f"[{tarih_str}] JSON dosyası güncellendi. Toplam öğe sayısı: {len(items)}")
 
 if __name__ == "__main__":
     update_market_data()

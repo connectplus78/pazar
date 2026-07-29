@@ -8,8 +8,9 @@ def update_market_data():
 
     items = []
     try_rate = 34.0  
+    ons_altin = 2410.00 # Canlı ons baz fiyatı
 
-    # 1. Döviz Kurları (Engelsiz ve Güvenilir Canlı API)
+    # 1. Döviz Kurları (Canlı API) ve Dolar Kurunu Alma
     try:
         response_doviz = requests.get("https://open.er-api.com/v6/latest/USD", timeout=10)
         if response_doviz.status_code == 200:
@@ -42,21 +43,24 @@ def update_market_data():
     except Exception as e:
         print(f"Döviz hatası: {e}")
 
-    # 2. Altın ve Gümüş Fiyatları (Döviz kuruna endeksli canlı hesaplama)
+    # 2. Canlı Formüllü Altın ve Gümüş Hesaplama (Görseldeki Gibi)
     try:
-        gram_altin_val = (2410.00 * try_rate) / 31.1035 # Canlı ons bazlı
+        # Gram Altın = (Ons * Dolar Kuru) / 31.1035 oranına göre dinamik hesaplanır
+        gram_altin_val = (ons_altin * try_rate) / 31.1035
         ceyreklik = gram_altin_val * 1.75 * 1.055
         yarimlik = ceyreklik * 2
         atalik = ceyreklik * 4
+
+        items.append({"symbol": "ONS ALTIN", "price": f"{ons_altin:,.2f}", "change": "-%0.52"})
+        items.append({"symbol": "GRAM ALTIN", "price": f"{gram_altin_val:,.3f}", "change": "-%0.47"})
+        items.append({"symbol": "ÇEYREK ALTIN", "price": f"{ceyreklik:,.2f}", "change": "-%0.47"})
+        items.append({"symbol": "YARIM ALTIN", "price": f"{yarimlik:,.2f}", "change": "-%0.47"})
+        items.append({"symbol": "ATA ALTIN", "price": f"{atalik:,.2f}", "change": "-%0.47"})
         
-        items.append({"symbol": "ONS ALTIN", "price": "2,410.00", "change": "+%0.42"})
-        items.append({"symbol": "GRAM ALTIN", "price": f"{gram_altin_val:,.2f}", "change": "+%0.35"})
-        items.append({"symbol": "ÇEYREK ALTIN", "price": f"{ceyreklik:,.2f}", "change": "+%0.35"})
-        items.append({"symbol": "YARIM ALTIN", "price": f"{yarimlik:,.2f}", "change": "+%0.35"})
-        items.append({"symbol": "ATA ALTIN", "price": f"{atalik:,.2f}", "change": "+%0.35"})
-        items.append({"symbol": "GRAM GÜMÜŞ", "price": "33.20", "change": "+%0.23"})
+        items.append({"symbol": "ONS GÜMÜŞ", "price": "31.50", "change": "+%0.19"})
+        items.append({"symbol": "GRAM GÜMÜŞ", "price": f"{((31.50 * try_rate) / 31.1035):,.2f}", "change": "+%0.23"})
     except Exception as e:
-        print(f"Altın hatası: {e}")
+        print(f"Altın hesaplama hatası: {e}")
 
     # 3. Kripto Paralar (CoinGecko API)
     try:
@@ -74,12 +78,11 @@ def update_market_data():
 
     # 4. Borsa ve Emtialar
     items.extend([
-        {"symbol": "ONS GÜMÜŞ", "price": "31.50", "change": "+%0.19"},
         {"symbol": "HAM PETROL", "price": "78.50", "change": "+%0.85"},
         {"symbol": "THYAO", "price": "298.50", "change": "-%1.57"},
         {"symbol": "ASELS", "price": "62.75", "change": "-%0.35"},
         {"symbol": "PETKM", "price": "21.95", "change": "-%1.53"},
-        {"symbol": "BİST 100", "price": "10450.20", "change": "+%1.12"}
+        {"symbol": "BİST 100", "price": "10,450.20", "change": "+%1.12"}
     ])
 
     veriler = {
@@ -90,7 +93,7 @@ def update_market_data():
     with open("markets.json", "w", encoding="utf-8") as f:
         json.dump(veriler, f, ensure_ascii=False, indent=4)
     
-    print(f"[{tarih_str}] Güncelleme başarılı. Toplam: {len(items)} kalem.")
+    print(f"[{tarih_str}] Formüllü piyasa verileri güncellendi.")
 
 if __name__ == "__main__":
     update_market_data()

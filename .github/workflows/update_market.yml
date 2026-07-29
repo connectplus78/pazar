@@ -3,7 +3,7 @@ name: Piyasa Verilerini Güncelle
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '*/5 * * * *'
 
 permissions:
   contents: write # GitHub Actions'ın dosyaları değiştirebilmesi ve gönderebilmesi için kritik izin

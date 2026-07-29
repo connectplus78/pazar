@@ -3,26 +3,35 @@ import urllib.request
 import ssl
 from datetime import datetime
 
-# Paratic veya genel finansal verileri simüle eden/çeken yapı
-# Not: Gerçek sitenin yapısına göre BeautifulSoup eklenebilir, 
-# burada örnek ve kararlı çalışması için standart finans API/yapısı baz alınmıştır.
-
+# Simüle edilmiş piyasa verileri (Görseldeki değerlere yakın)
 def fetch_market_data():
     data = {
-        "last_update": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "last_update": datetime.now().strftime("%H:%M"),
         "items": [
-            {"symbol": "USD/TRY", "name": "Dolar / Türk Lirası", "price": "33.50", "change": "+0.15%"},
-            {"symbol": "EUR/TRY", "name": "Euro / Türk Lirası", "price": "36.20", "change": "-0.05%"},
-            {"symbol": "ALTIN", "name": "Gram Altın", "price": "2,650.40", "change": "+1.20%"},
-            {"symbol": "BIST 100", "name": "BIST 100", "icon": "bist", "price": "10,850.30", "change": "+0.45%"},
-            {"symbol": "EUR/USD", "name": "Euro / Dolar", "price": "1.0810", "change": "-0.10%"},
-            {"symbol": "BTC/USD", "name": "Bitcoin", "price": "65,400.00", "change": "+2.30%"}
+            {"symbol": "DOLAR", "name": "", "price": "47.3972", "change": "+%0.04"},
+            {"symbol": "EURO", "name": "", "price": "53.9956", "change": "-%0.01"},
+            {"symbol": "STERLİN", "name": "", "price": "63.0026", "change": "+%0.03"},
+            {"symbol": "ONS ALTIN", "name": "", "price": "4015.74", "change": "-%0.32"},
+            {"symbol": "GRAM ALTIN", "name": "", "price": "6119.907", "change": "-%0.28"},
+            {"symbol": "ÇEYREK ALTIN", "name": "", "price": "10006.05", "change": "-%0.28"},
+            {"symbol": "THYAO", "name": "", "price": "314", "change": "-%1.57", "alert": True},
+            {"symbol": "ASELS", "name": "", "price": "356.75", "change": "-%0.35"},
+            {"symbol": "PETKM", "name": "", "price": "19.95", "change": "-%1.53"},
+            {"symbol": "EUR/USD", "name": "", "price": "1.13838", "change": "-%0.03"},
+            {"symbol": "USD/JPY", "name": "", "price": "163.77", "change": "-%0.05"},
+            {"symbol": "EUR/GBP", "name": "", "price": "0.857", "change": "+%0.04"},
+            {"symbol": "HAM PETROL", "name": "", "price": "84.47", "change": "+%6.57"},
+            {"symbol": "ONS GÜMÜŞ", "name": "", "price": "57.18", "change": "+%0.09"},
+            {"symbol": "GRAM GÜMÜŞ", "name": "", "price": "87.1779", "change": "+%0.13"},
+            {"symbol": "BİTCOİN", "name": "", "price": "64335.99", "change": "+%2.20", "special": "crypto"},
+            {"symbol": "ETHEREUM", "name": "", "price": "1906.60", "change": "+%2.33", "special": "crypto"},
+            {"symbol": "BİST 100", "name": "", "price": "13547.68", "change": "-%1.07"}
         ]
     }
     
     with open('markets.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
-    print("Veriler başarıyla güncellendi.")
+    print("Veriler güncellendi.")
 
 if __name__ == "__main__":
     fetch_market_data()

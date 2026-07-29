@@ -53,24 +53,18 @@ def update_market_data():
     except Exception as e:
         print(f"Döviz verisi alınamadı: {e}")
 
-    # 2. Altın, Gümüş ve Emtia Verileri (Doğru Hesaplama Mantığı)
+    # 2. Altın, Gümüş ve Emtia Verileri (Net ve Kararlı Değerler)
     try:
-        ons_altin = 2380.50 
-        gram_altin_val = (ons_altin * try_rate) / 31.1035
-        ceyreklik = gram_altin_val * 1.75 * 1.055  
+        items.append({"symbol": "ONS ALTIN", "price": "2410.00", "change": "+%0.42"})
+        items.append({"symbol": "GRAM ALTIN", "price": "2650.00", "change": "+%0.35"})
+        items.append({"symbol": "ÇEYREK ALTIN", "price": "4350.00", "change": "+%0.35"})
         
-        items.append({"symbol": "ONS ALTIN", "price": f"{ons_altin:.2f}", "change": "+%0.42"})
-        items.append({"symbol": "GRAM ALTIN", "price": f"{gram_altin_val:.2f}", "change": "+%0.35"})
-        items.append({"symbol": "ÇEYREK ALTIN", "price": f"{ceyreklik:.2f}", "change": "+%0.35"})
-        
-        ons_gumus = 28.50
-        gram_gumus_val = (ons_gumus * try_rate) / 31.1035
-        items.append({"symbol": "ONS GÜMÜŞ", "price": f"{ons_gumus:.2f}", "change": "+%0.19"})
-        items.append({"symbol": "GRAM GÜMÜŞ", "price": f"{gram_gumus_val:.2f}", "change": "+%0.23"})
+        items.append({"symbol": "ONS GÜMÜŞ", "price": "31.50", "change": "+%0.19"})
+        items.append({"symbol": "GRAM GÜMÜŞ", "price": "33.20", "change": "+%0.23"})
         
         items.append({"symbol": "HAM PETROL", "price": "78.50", "change": "+%0.85"})
     except Exception as e:
-        print(f"Emtia hesaplanamadı: {e}")
+        print(f"Emtia işlenemedi: {e}")
 
     # 3. Canlı Kripto Paralar (CoinGecko API)
     try:
@@ -112,7 +106,7 @@ def update_market_data():
     with open("markets.json", "w", encoding="utf-8") as f:
         json.dump(veriler, f, ensure_ascii=False, indent=4)
     
-    print(f"[{tarih_str}] Tüm para birimleri ve piyasa verileri güncellendi.")
+    print(f"[{tarih_str}] Piyasalar başarıyla güncellendi.")
 
 if __name__ == "__main__":
     update_market_data()

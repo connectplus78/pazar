@@ -1,0 +1,42 @@
+{
+    "last_update": "2026-07-29 13:37:48",
+    "items": [
+        {
+            "symbol": "USD/TRY",
+            "name": "Dolar / Türk Lirası",
+            "price": "33.50",
+            "change": "+0.15%"
+        },
+        {
+            "symbol": "EUR/TRY",
+            "name": "Euro / Türk Lirası",
+            "price": "36.20",
+            "change": "-0.05%"
+        },
+        {
+            "symbol": "ALTIN",
+            "name": "Gram Altın",
+            "price": "2,650.40",
+            "change": "+1.20%"
+        },
+        {
+            "symbol": "BIST 100",
+            "name": "BIST 100",
+            "icon": "bist",
+            "price": "10,850.30",
+            "change": "+0.45%"
+        },
+        {
+            "symbol": "EUR/USD",
+            "name": "Euro / Dolar",
+            "price": "1.0810",
+            "change": "-0.10%"
+        },
+        {
+            "symbol": "BTC/USD",
+            "name": "Bitcoin",
+            "price": "65,400.00",
+            "change": "+2.30%"
+        }
+    ]
+}

@@ -1,31 +1,33 @@
-name: Update Market Data
+name: Piyasa Verilerini Güncelle
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '*/30 * * * *' # Her 30 dakikada bir çalışır
-  workflow_dispatch: # Manuel tetikleme desteği
-
-permissions:
-  contents: write
+    - cron: '*/10 * * * *' # Her 10 dakikada bir otomatik çalışır
 
 jobs:
-  update-data:
+  update:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Kodları Depodan Çek
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Python Kurulumu
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
-      - name: Run Bot
+      - name: Gerekli Kütüphaneleri Yükle
+        run: |
+          pip install requests
+
+      - name: Botu Çalıştır
         run: python bot.py
 
-      - name: Commit and push if changes
+      - name: Değişiklikleri GitHub'a Kaydet (Commit & Push)
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add markets.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Otomatik Piyasa Verisi Güncellemesi [skip ci]" && git push)
+          git commit -m "Otomatik piyasa verisi güncellendi" || echo "Değişiklik yok"
+          git push

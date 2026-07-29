@@ -1,96 +1,34 @@
+import requests
 import json
 from datetime import datetime
-import requests
 
-def update_market_data():
-    now = datetime.now()
-    tarih_str = now.strftime("%d-%m-%Y %H:%M:%S")
-
-    items = []
-    try_rate = 34.0  
-
-    # 1. Canlı Döviz Kurları
+def update_markets():
     try:
-        response_doviz = requests.get("https://open.er-api.com/v6/latest/USD", timeout=10)
-        if response_doviz.status_code == 200:
-            data_doviz = response_doviz.json()
-            rates = data_doviz.get("rates", {})
-            try_rate = rates.get("TRY", 34.0)
-            eur_rate = rates.get("EUR", 1.0)
-            gbp_rate = rates.get("GBP", 1.0)
-            jpy_rate = rates.get("JPY", 150.0)
-            
-            items.append({"symbol": "DOLAR", "price": f"{try_rate:.4f}", "change": "+%0.05"})
-            
-            if eur_rate > 0:
-                eur_try = try_rate / eur_rate
-                items.append({"symbol": "EURO", "price": f"{eur_try:.4f}", "change": "-%0.02"})
-                
-            if gbp_rate > 0:
-                gbp_try = try_rate / gbp_rate
-                items.append({"symbol": "STERLİN", "price": f"{gbp_try:.4f}", "change": "+%0.03"})
-
-            items.append({"symbol": "EUR/USD", "price": f"{(try_rate / (try_rate / eur_rate) if eur_rate else 1.1):.5f}", "change": "-%0.03"})
-            items.append({"symbol": "USD/JPY", "price": f"{jpy_rate:.2f}", "change": "-%0.05"})
-            items.append({"symbol": "EUR/GBP", "price": f"{((try_rate / eur_rate) / (try_rate / gbp_rate)):.4f}" if (eur_rate and gbp_rate) else "0.857", "change": "+%0.04"})
-    except Exception as e:
-        print(f"Döviz verisi alınamadı: {e}")
-
-    # 2. Altın, Gümüş ve Emtia Verileri (Sabit, Net ve Kararlı Fiyatlar)
-    try:
-        # Burada rakamlar formüller yüzünden bozulmaz, doğrudan istediğimiz net değerler yazılır
-        items.append({"symbol": "ONS ALTIN", "price": "2380.50", "change": "+%0.42"})
-        items.append({"symbol": "GRAM ALTIN", "price": "2650.00", "change": "+%0.35"})
-        items.append({"symbol": "ÇEYREK ALTIN", "price": "4350.00", "change": "+%0.35"})
+        # GenelPara ücretsiz API uç noktası
+        url = "https://api.genelpara.com/json/"
+        response = requests.get(url, timeout=10)
+        data = response.json()
         
-        items.append({"symbol": "ONS GÜMÜŞ", "price": "28.50", "change": "+%0.19"})
-        items.append({"symbol": "GRAM GÜMÜŞ", "price": "32.50", "change": "+%0.23"})
+        # API'den gelen canlı veriler (Ons, Gram, Çeyrek vb.)
+        # data yapısına göre parse edip items listesi oluşturulur
+        items = [
+            {"symbol": "ONS ALTIN", "price": str(data.get("ONS", {}).get("satis", "2380.50")), "change": "+" + str(data.get("ONS", {}).get("degisim", "0.42")) + "%"},
+            {"symbol": "GRAM ALTIN", "price": str(data.get("GA", {}).get("satis", "2650.00")), "change": "+" + str(data.get("GA", {}).get("degisim", "0.35")) + "%"},
+            {"symbol": "ÇEYREK ALTIN", "price": str(data.get("C", {}).get("satis", "4350.00")), "change": "+" + str(data.get("C", {}).get("degisim", "0.35")) + "%"},
+            {"symbol": "ONS GÜMÜŞ", "price": "28.50", "change": "+%0.19"}
+        ]
         
-        items.append({"symbol": "HAM PETROL", "price": "78.50", "change": "+%0.85"})
-    except Exception as e:
-        print(f"Emtia işlenemedi: {e}")
-
-    # 3. Canlı Kripto Paralar (CoinGecko API)
-    try:
-        response_crypto = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true", timeout=10)
-        if response_crypto.status_code == 200:
-            c_data = response_crypto.json()
+        output = {
+            "son_güncelleme": datetime.now().strftime("%d.%m.%Y %H:%M:%S"),
+            "items": items
+        }
+        
+        with open("markets.json", "w", encoding="utf-8") as f:
+            json.dump(output, f, ensure_ascii=False, indent=4)
             
-            btc_price = c_data.get("bitcoin", {}).get("usd", 65000.0)
-            btc_change = c_data.get("bitcoin", {}).get("usd_24h_change", 1.5)
-            items.append({
-                "symbol": "BİTCOİN", 
-                "price": f"{btc_price:,.2f}", 
-                "change": f"{'+' if btc_change >= 0 else ''}%{btc_change:.2f}"
-            })
-
-            eth_price = c_data.get("ethereum", {}).get("usd", 3500.0)
-            eth_change = c_data.get("ethereum", {}).get("usd_24h_change", 1.2)
-            items.append({
-                "symbol": "ETER", 
-                "price": f"{eth_price:,.2f}", 
-                "change": f"{'+' if eth_change >= 0 else ''}%{eth_change:.2f}"
-            })
+        print("Piyasa verileri başarıyla güncellendi.")
     except Exception as e:
-        print(f"Kripto verisi alınamadı: {e}")
-
-    # 4. Borsa / Endeksler
-    items.extend([
-        {"symbol": "THYAO", "price": "298.50", "change": "-%1.57"},
-        {"symbol": "ASELS", "price": "62.75", "change": "-%0.35"},
-        {"symbol": "PETKM", "price": "21.95", "change": "-%1.53"},
-        {"symbol": "BİST 100", "price": "10450.20", "change": "+%1.12"}
-    ])
-
-    veriler = {
-        "son_güncelleme": tarih_str,
-        "items": items
-    }
-
-    with open("markets.json", "w", encoding="utf-8") as f:
-        json.dump(veriler, f, ensure_ascii=False, indent=4)
-    
-    print(f"[{tarih_str}] Kararlı veriler başarıyla güncellendi.")
+        print("Hata:", e)
 
 if __name__ == "__main__":
-    update_market_data()
+    update_markets()

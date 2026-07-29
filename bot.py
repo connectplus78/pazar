@@ -4,7 +4,7 @@ import requests
 
 def update_market_data():
     # Belirttiğiniz v3 API endpoint'i kullanılıyor
-    url = "https://finans.truncgil.com/v3/today.json"
+    url = "https://finans.truncgil.com/v4/today.json"
 
     print("Canlı piyasa verileri v3 API'den çekiliyor...")
     try:

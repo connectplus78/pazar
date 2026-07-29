@@ -1,99 +1,66 @@
 import json
 from datetime import datetime
 import requests
-import xml.etree.ElementTree as ET
 
 def update_market_data():
     now = datetime.now()
     tarih_str = now.strftime("%d-%m-%Y %H:%M:%S")
 
     items = []
-    try_rate = 34.0  
 
-    # 1. TCMB Resmi XML Servisinden Döviz Kurlarını Çekme
+    # 1. Canlı Döviz ve Altın Verileri (GenelPara API - Serbest Piyasa)
     try:
-        tcmb_url = "https://www.tcmb.gov.tr/kurlar/today.xml"
-        response = requests.get(tcmb_url, timeout=10)
-        
+        response = requests.get("https://api.genelpara.com/json/", timeout=10)
         if response.status_code == 200:
-            root = ET.fromstring(response.content)
+            data = response.json()
             
-            # TCMB verilerinden kur yakalama yardımcı fonksiyonu
-            def get_tcmb_rate(code):
-                for currency in root.findall('Currency'):
-                    if currency.get('CurrencyCode') == code:
-                        forex_selling = currency.find('ForexSelling')
-                        if forex_selling is not None and forex_selling.text:
-                            return float(forex_selling.text)
-                return None
-
-            usd = get_tcmb_rate('USD')
-            eur = get_tcmb_rate('EUR')
-            gbp = get_tcmb_rate('GBP')
-            chf = get_tcmb_rate('CHF')
-            cad = get_tcmb_rate('CAD')
-            aud = get_tcmb_rate('AUD')
-            sar = get_tcmb_rate('SAR')
-            rub = get_tcmb_rate('RUB')
-            cny = get_tcmb_rate('CNY')
-            jpy = get_tcmb_rate('JPY') # Genellikle 100 JPY olarak gelir
-
-            if usd:
-                try_rate = usd
-                items.append({"symbol": "DOLAR", "price": f"{usd:.4f}", "change": "+%0.05"})
-            if eur:
-                items.append({"symbol": "EURO", "price": f"{eur:.4f}", "change": "-%0.02"})
-            if gbp:
-                items.append({"symbol": "STERLİN", "price": f"{gbp:.4f}", "change": "+%0.03"})
-            if chf:
-                items.append({"symbol": "İSVİÇRE FRANGI", "price": f"{chf:.4f}", "change": "+%0.10"})
-            if cad:
-                items.append({"symbol": "KANADA DOLARI", "price": f"{cad:.4f}", "change": "-%0.04"})
-            if aud:
-                items.append({"symbol": "AVUSTRALYA DOLARI", "price": f"{aud:.4f}", "change": "+%0.08"})
-            if sar:
-                items.append({"symbol": "SUUDİ RİYALİ", "price": f"{sar:.4f}", "change": "%0.00"})
-            if rub:
-                items.append({"symbol": "RUS RUBLESİ", "price": f"{rub:.4f}", "change": "-%0.15"})
-            if cny:
-                items.append({"symbol": "ÇİN YUANI", "price": f"{cny:.4f}", "change": "+%0.02"})
-            if jpy:
-                # TCMB 100 Japon Yeni olarak verir, teke çevirelim
-                jpy_single = jpy / 100.0
-                items.append({"symbol": "JAPON YENİ", "price": f"{jpy_single:.4f}", "change": "-%0.05"})
+            # Dövizler
+            if "USD" in data:
+                items.append({"symbol": "DOLAR", "price": str(data["USD"].get("satis", "34.00")), "change": f"%{data['USD'].get('degisim', '0')}"})
+            if "EUR" in data:
+                items.append({"symbol": "EURO", "price": str(data["EUR"].get("satis", "37.00")), "change": f"%{data['EUR'].get('degisim', '0')}"})
+            if "GBP" in data:
+                items.append({"symbol": "STERLİN", "price": str(data["GBP"].get("satis", "44.00")), "change": f"%{data['GBP'].get('degisim', '0')}"})
+            if "CHF" in data:
+                items.append({"symbol": "İSVİÇRE FRANGI", "price": str(data["CHF"].get("satis", "39.00")), "change": f"%{data['CHF'].get('degisim', '0')}"})
+            if "CAD" in data:
+                items.append({"symbol": "KANADA DOLARI", "price": str(data["CAD"].get("satis", "25.00")), "change": f"%{data['CAD'].get('degisim', '0')}"})
+            if "AUD" in data:
+                items.append({"symbol": "AVUSTRALYA DOLARI", "price": str(data["AUD"].get("satis", "23.00")), "change": f"%{data['AUD'].get('degisim', '0')}"})
+            if "SAR" in data:
+                items.append({"symbol": "SUUDİ RİYALİ", "price": str(data["SAR"].get("satis", "9.00")), "change": f"%{data['SAR'].get('degisim', '0')}"})
+            if "RUB" in data:
+                items.append({"symbol": "RUS RUBLESİ", "price": str(data["RUB"].get("satis", "0.35")), "change": f"%{data['RUB'].get('degisim', '0')}"})
+            if "CNY" in data:
+                items.append({"symbol": "ÇİN YUANI", "price": str(data["CNY"].get("satis", "4.70")), "change": f"%{data['CNY'].get('degisim', '0')}"})
 
             # Pariteler
-            if eur and usd:
-                items.append({"symbol": "EUR/USD", "price": f"{(eur / usd):.5f}", "change": "-%0.03"})
-            if usd and jpy:
-                items.append({"symbol": "USD/JPY", "price": f"{(100.0 / jpy * usd):.2f}" if jpy else "150.00", "change": "-%0.05"})
-            if eur and gbp:
-                items.append({"symbol": "EUR/GBP", "price": f"{(eur / gbp):.4f}", "change": "+%0.04"})
+            if "EURUSD" in data:
+                items.append({"symbol": "EUR/USD", "price": str(data["EURUSD"].get("satis", "1.08")), "change": f"%{data['EURUSD'].get('degisim', '0')}"})
+            if "USDJPY" in data:
+                items.append({"symbol": "USD/JPY", "price": str(data["USDJPY"].get("satis", "150.00")), "change": f"%{data['USDJPY'].get('degisim', '0')}"})
 
+            # Altın ve Gümüş (Serbest Piyasa / Kuyumcu Fiyatları)
+            if "ONS" in data:
+                items.append({"symbol": "ONS ALTIN", "price": str(data["ONS"].get("satis", "2400")), "change": f"%{data['ONS'].get('degisim', '0')}"})
+            if "GA" in data:
+                items.append({"symbol": "GRAM ALTIN", "price": str(data["GA"].get("satis", "2650")), "change": f"%{data['GA'].get('degisim', '0')}"})
+            if "C" in data:
+                items.append({"symbol": "ÇEYREK ALTIN", "price": str(data["C"].get("satis", "4350")), "change": f"%{data['C'].get('degisim', '0')}"})
+            if "GUMUS" in data:
+                items.append({"symbol": "GRAM GÜMÜŞ", "price": str(data["GUMUS"].get("satis", "33.00")), "change": f"%{data['GUMUS'].get('degisim', '0')}"})
+                
     except Exception as e:
-        print(f"TCMB veri çekme hatası: {e}")
+        print(f"GenelPara API hatası: {e}")
 
-    # 2. Altın, Gümüş ve Emtia Verileri (Net ve Kararlı Değerler)
-    try:
-        items.append({"symbol": "ONS ALTIN", "price": "2410.00", "change": "+%0.42"})
-        items.append({"symbol": "GRAM ALTIN", "price": "2650.00", "change": "+%0.35"})
-        items.append({"symbol": "ÇEYREK ALTIN", "price": "4350.00", "change": "+%0.35"})
-        
-        items.append({"symbol": "ONS GÜMÜŞ", "price": "31.50", "change": "+%0.19"})
-        items.append({"symbol": "GRAM GÜMÜŞ", "price": "33.20", "change": "+%0.23"})
-        
-        items.append({"symbol": "HAM PETROL", "price": "78.50", "change": "+%0.85"})
-    except Exception as e:
-        print(f"Emtia işlenemedi: {e}")
-
-    # 3. Canlı Kripto Paralar (CoinGecko API)
+    # 2. Canlı Kripto Paralar (CoinGecko API)
     try:
         response_crypto = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true", timeout=10)
         if response_crypto.status_code == 200:
             c_data = response_crypto.json()
             
             btc_price = c_data.get("bitcoin", {}).get("usd", 65000.0)
-            btc_change = c_data.get("bitcoin", {}).get("usd_24h_change", 1.5)
+            btc_change = c_data.get("bitcoin", {}).get("usd_24h_change", 0.0)
             items.append({
                 "symbol": "BİTCOİN", 
                 "price": f"{btc_price:,.2f}", 
@@ -101,7 +68,7 @@ def update_market_data():
             })
 
             eth_price = c_data.get("ethereum", {}).get("usd", 3500.0)
-            eth_change = c_data.get("ethereum", {}).get("usd_24h_change", 1.2)
+            eth_change = c_data.get("ethereum", {}).get("usd_24h_change", 0.0)
             items.append({
                 "symbol": "ETER", 
                 "price": f"{eth_price:,.2f}", 
@@ -110,8 +77,10 @@ def update_market_data():
     except Exception as e:
         print(f"Kripto verisi alınamadı: {e}")
 
-    # 4. Borsa / Endeksler
+    # 3. Borsa / Endeksler
     items.extend([
+        {"symbol": "ONS GÜMÜŞ", "price": "31.50", "change": "+%0.19"},
+        {"symbol": "HAM PETROL", "price": "78.50", "change": "+%0.85"},
         {"symbol": "THYAO", "price": "298.50", "change": "-%1.57"},
         {"symbol": "ASELS", "price": "62.75", "change": "-%0.35"},
         {"symbol": "PETKM", "price": "21.95", "change": "-%1.53"},
@@ -126,7 +95,7 @@ def update_market_data():
     with open("markets.json", "w", encoding="utf-8") as f:
         json.dump(veriler, f, ensure_ascii=False, indent=4)
     
-    print(f"[{tarih_str}] TCMB verileriyle piyasalar güncellendi.")
+    print(f"[{tarih_str}] Piyasalar canlı olarak güncellendi.")
 
 if __name__ == "__main__":
     update_market_data()

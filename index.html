@@ -149,7 +149,6 @@
             animation: flashRed 1.2s ease-out;
         }
 
-        /* Alt Footer Alanı */
         .footer-custom {
             text-align: center;
             margin-top: 4rem;
@@ -242,8 +241,10 @@
                 
                 const data = await response.json();
                 
-                if (data.last_update) {
-                    document.getElementById('lastUpdateTime').textContent = data.last_update;
+                // Güncelleme saatini yakalama (her iki anahtar ihtimaline karşı)
+                const updateTimeText = data.last_update || data.son_güncelleme;
+                if (updateTimeText) {
+                    document.getElementById('lastUpdateTime').textContent = updateTimeText;
                 }
                 
                 let allItems = [];

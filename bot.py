@@ -3,7 +3,7 @@ from datetime import datetime
 import requests
 
 def update_market_data():
-    url = "https://finans.truncgil.com/v3/today.json"
+    url = "https://finans.truncgil.com/v4/today.json"
 
     print("Canlı piyasa verileri v4 API'den çekiliyor...")
     try:

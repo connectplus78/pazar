@@ -3,7 +3,10 @@ name: Piyasa Verilerini Güncelle
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/10 * * * *' # Her 10 dakikada bir otomatik çalışır
+    - cron: '*/10 * * * *'
+
+permissions:
+  contents: write # GitHub Actions'ın dosyaları değiştirebilmesi ve gönderebilmesi için kritik izin
 
 jobs:
   update:
@@ -18,13 +21,12 @@ jobs:
           python-version: '3.11'
 
       - name: Gerekli Kütüphaneleri Yükle
-        run: |
-          pip install requests
+        run: pip install requests
 
       - name: Botu Çalıştır
         run: python bot.py
 
-      - name: Değişiklikleri GitHub'a Kaydet (Commit & Push)
+      - name: Değişiklikleri GitHub'a Kaydet
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"

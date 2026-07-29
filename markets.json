@@ -1,86 +1,421 @@
 {
-    "last_update": "2021-03-31 11:45:01",
-    "son_güncelleme": "2021-03-31 11:45:01",
+    "last_update": "2026-07-29 20:00:02",
+    "son_güncelleme": "2026-07-29 20:00:02",
     "items": [
         {
-            "symbol": "ONS ALTIN",
-            "price": "1.685,04",
+            "symbol": "USD",
+            "price": "47,3980",
+            "change": "%0,03"
+        },
+        {
+            "symbol": "EUR",
+            "price": "54,0033",
+            "change": "%-0,01"
+        },
+        {
+            "symbol": "GBP",
+            "price": "63,0406",
+            "change": "%0,07"
+        },
+        {
+            "symbol": "CHF",
+            "price": "57,7813",
+            "change": "%-0,11"
+        },
+        {
+            "symbol": "CAD",
+            "price": "33,6299",
+            "change": "%0,14"
+        },
+        {
+            "symbol": "RUB",
+            "price": "0,5938",
+            "change": "%-1,49"
+        },
+        {
+            "symbol": "AED",
+            "price": "12,9055",
+            "change": "%0,05"
+        },
+        {
+            "symbol": "AUD",
+            "price": "32,8468",
+            "change": "%-0,60"
+        },
+        {
+            "symbol": "DKK",
+            "price": "7,2202",
+            "change": "%0,04"
+        },
+        {
+            "symbol": "SEK",
+            "price": "4,8751",
+            "change": "%-0,29"
+        },
+        {
+            "symbol": "NOK",
+            "price": "4,9059",
+            "change": "%0,31"
+        },
+        {
+            "symbol": "JPY",
+            "price": "0,2898",
+            "change": "%0,03"
+        },
+        {
+            "symbol": "KWD",
+            "price": "152,9042",
+            "change": "%0,09"
+        },
+        {
+            "symbol": "ZAR",
+            "price": "2,8264",
+            "change": "%-0,42"
+        },
+        {
+            "symbol": "BHD",
+            "price": "125,6875",
+            "change": "%0,03"
+        },
+        {
+            "symbol": "LYD",
+            "price": "7,3829",
+            "change": "%-0,02"
+        },
+        {
+            "symbol": "SAR",
+            "price": "12,6253",
+            "change": "%0,03"
+        },
+        {
+            "symbol": "IQD",
+            "price": "0,0362",
+            "change": "%0,03"
+        },
+        {
+            "symbol": "ILS",
+            "price": "15,3840",
+            "change": "%-0,91"
+        },
+        {
+            "symbol": "INR",
+            "price": "0,4943",
+            "change": "%-0,17"
+        },
+        {
+            "symbol": "MXN",
+            "price": "2,7063",
+            "change": "%-0,43"
+        },
+        {
+            "symbol": "HUF",
+            "price": "0,1486",
+            "change": "%-0,90"
+        },
+        {
+            "symbol": "NZD",
+            "price": "27,3298",
+            "change": "%-0,31"
+        },
+        {
+            "symbol": "BRL",
+            "price": "9,2441",
+            "change": "%-0,09"
+        },
+        {
+            "symbol": "IDR",
+            "price": "0,0026",
+            "change": "%0,11"
+        },
+        {
+            "symbol": "CZK",
+            "price": "2,2312",
+            "change": "%-0,03"
+        },
+        {
+            "symbol": "PLN",
+            "price": "12,4702",
+            "change": "%-0,05"
+        },
+        {
+            "symbol": "RON",
+            "price": "10,3068",
+            "change": "%-0,16"
+        },
+        {
+            "symbol": "CNY",
+            "price": "7,0007",
+            "change": "%0,05"
+        },
+        {
+            "symbol": "ARS",
+            "price": "0,0317",
+            "change": "%0,24"
+        },
+        {
+            "symbol": "ALL",
+            "price": "0,5762",
+            "change": "%-0,05"
+        },
+        {
+            "symbol": "AZN",
+            "price": "27,8812",
+            "change": "%0,03"
+        },
+        {
+            "symbol": "BAM",
+            "price": "27,5987",
+            "change": "%-2,48"
+        },
+        {
+            "symbol": "CLP",
+            "price": "0,0507",
+            "change": "%-0,47"
+        },
+        {
+            "symbol": "COP",
+            "price": "0,0148",
+            "change": "%0,06"
+        },
+        {
+            "symbol": "CRC",
+            "price": "0,1041",
+            "change": "%-0,01"
+        },
+        {
+            "symbol": "DZD",
+            "price": "0,3554",
+            "change": "%0,03"
+        },
+        {
+            "symbol": "EGP",
+            "price": "0,9354",
+            "change": "%-0,32"
+        },
+        {
+            "symbol": "HKD",
+            "price": "6,0434",
             "change": "%0,00"
         },
         {
-            "symbol": "GRAM ALTIN",
-            "price": "451,00",
-            "change": "%0,00"
+            "symbol": "ISK",
+            "price": "0,3783",
+            "change": "%-0,29"
         },
         {
-            "symbol": "ÇEYREK ALTIN",
-            "price": "739,92",
-            "change": "%0,00"
+            "symbol": "KRW",
+            "price": "0,0327",
+            "change": "%0,28"
         },
         {
-            "symbol": "YARIM ALTIN",
-            "price": "1.479,85",
-            "change": "%0,00"
+            "symbol": "KZT",
+            "price": "0,0996",
+            "change": "%0,22"
         },
         {
-            "symbol": "TAM ALTIN",
-            "price": "2.929,84",
-            "change": "%0,00"
+            "symbol": "LBP",
+            "price": "0,0005",
+            "change": "%0,03"
         },
         {
-            "symbol": "CUMHURIYET ALTINI",
-            "price": "3.013,34",
-            "change": "%0,00"
+            "symbol": "LKR",
+            "price": "0,1411",
+            "change": "%0,05"
         },
         {
-            "symbol": "ATA ALTIN",
-            "price": "3.013,34",
-            "change": "%0,00"
+            "symbol": "MAD",
+            "price": "5,0496",
+            "change": "%-0,07"
         },
         {
-            "symbol": "REŞAT ALTIN",
-            "price": "3.006,69",
-            "change": "%0,00"
+            "symbol": "MDL",
+            "price": "2,6885",
+            "change": "%-0,13"
         },
         {
-            "symbol": "HAMIT ALTIN",
-            "price": "3.006,69",
-            "change": "%0,00"
+            "symbol": "MKD",
+            "price": "0,8773",
+            "change": "%0,24"
         },
         {
-            "symbol": "İKIBUÇUK ALTIN",
-            "price": "7.324,62",
-            "change": "%0,00"
+            "symbol": "MYR",
+            "price": "11,5919",
+            "change": "%0,08"
         },
         {
-            "symbol": "GREMSE ALTIN",
-            "price": "7.324,62",
-            "change": "%0,00"
+            "symbol": "OMR",
+            "price": "123,2718",
+            "change": "%0,03"
         },
         {
-            "symbol": "BEŞLI ALTIN",
-            "price": "14.924,77",
-            "change": "%0,00"
+            "symbol": "PEN",
+            "price": "13,9324",
+            "change": "%0,09"
         },
         {
-            "symbol": "14 AYAR ALTIN",
-            "price": "265,73",
-            "change": "%0,00"
+            "symbol": "PHP",
+            "price": "0,7710",
+            "change": "%0,08"
         },
         {
-            "symbol": "18 AYAR ALTIN",
-            "price": "341,67",
-            "change": "%0,00"
+            "symbol": "PKR",
+            "price": "0,1708",
+            "change": "%0,06"
         },
         {
-            "symbol": "22 AYAR BILEZIK",
-            "price": "417,57",
-            "change": "%0,00"
+            "symbol": "QAR",
+            "price": "13,0150",
+            "change": "%0,05"
         },
         {
-            "symbol": "GÜMÜŞ",
-            "price": "6,45",
-            "change": "%0,00"
+            "symbol": "RSD",
+            "price": "0,4602",
+            "change": "%0,04"
+        },
+        {
+            "symbol": "SGD",
+            "price": "36,6602",
+            "change": "%-0,04"
+        },
+        {
+            "symbol": "SYP",
+            "price": "0,3885",
+            "change": "%0,07"
+        },
+        {
+            "symbol": "THB",
+            "price": "1,4123",
+            "change": "%-0,14"
+        },
+        {
+            "symbol": "TWD",
+            "price": "1,4629",
+            "change": "%-0,06"
+        },
+        {
+            "symbol": "UAH",
+            "price": "1,0563",
+            "change": "%0,33"
+        },
+        {
+            "symbol": "UYU",
+            "price": "1,1791",
+            "change": "%-0,07"
+        },
+        {
+            "symbol": "GEL",
+            "price": "18,0564",
+            "change": "%2,32"
+        },
+        {
+            "symbol": "TND",
+            "price": "16,0182",
+            "change": "%0,20"
+        },
+        {
+            "symbol": "BGN",
+            "price": "27,7430",
+            "change": "%0,24"
+        },
+        {
+            "symbol": "VND",
+            "price": "0,0018",
+            "change": "%-0,07"
+        },
+        {
+            "symbol": "ONS",
+            "price": "$4.028,03",
+            "change": "%-0,02"
+        },
+        {
+            "symbol": "GRAM-ALTIN",
+            "price": "6.137,58",
+            "change": "%0,01"
+        },
+        {
+            "symbol": "GRAM-HAS-ALTIN",
+            "price": "6.106,89",
+            "change": "%0,01"
+        },
+        {
+            "symbol": "CEYREK-ALTIN",
+            "price": "9.975,09",
+            "change": "%-0,42"
+        },
+        {
+            "symbol": "YARIM-ALTIN",
+            "price": "19.950,17",
+            "change": "%-0,42"
+        },
+        {
+            "symbol": "TAM-ALTIN",
+            "price": "39.778,32",
+            "change": "%-0,42"
+        },
+        {
+            "symbol": "CUMHURIYET-ALTINI",
+            "price": "41.044,00",
+            "change": "%-0,36"
+        },
+        {
+            "symbol": "ATA-ALTIN",
+            "price": "41.242,56",
+            "change": "%-0,42"
+        },
+        {
+            "symbol": "14-AYAR-ALTIN",
+            "price": "3.477,55",
+            "change": "%-0,42"
+        },
+        {
+            "symbol": "18-AYAR-ALTIN",
+            "price": "4.453,71",
+            "change": "%-0,42"
+        },
+        {
+            "symbol": "22-AYAR-BILEZIK",
+            "price": "5.564,08",
+            "change": "%-0,42"
+        },
+        {
+            "symbol": "IKIBUCUK-ALTIN",
+            "price": "99.079,75",
+            "change": "%-0,42"
+        },
+        {
+            "symbol": "BESLI-ALTIN",
+            "price": "201.332,01",
+            "change": "%-0,42"
+        },
+        {
+            "symbol": "GREMSE-ALTIN",
+            "price": "99.750,86",
+            "change": "%-0,42"
+        },
+        {
+            "symbol": "RESAT-ALTIN",
+            "price": "41.242,56",
+            "change": "%-0,42"
+        },
+        {
+            "symbol": "HAMIT-ALTIN",
+            "price": "41.242,56",
+            "change": "%-0,42"
+        },
+        {
+            "symbol": "GUMUS",
+            "price": "87,99",
+            "change": "%1,07"
+        },
+        {
+            "symbol": "GRAM-PLATIN",
+            "price": "2.433,47",
+            "change": "%-0,69"
+        },
+        {
+            "symbol": "GRAM-PALADYUM",
+            "price": "1.914,03",
+            "change": "%-0,60"
         }
     ]
 }

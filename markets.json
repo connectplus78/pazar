@@ -1,5 +1,5 @@
 {
-    "son_güncelleme": "29-07-2026 14:37",
+    "son_güncelleme": "29-07-2026 15:06:20",
     "items": [
         {
             "symbol": "DOLAR",
@@ -87,7 +87,7 @@
             "change": "+%2,33"
         },
         {
-            "symbol": "BİST 100",
+            "symbol": "BIST 100",
             "price": "13547.68",
             "change": "-%1,07"
         }

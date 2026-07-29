@@ -90,34 +90,34 @@
     </div>
 
     <script>
-        // Eski verilerin önbelleğe takılmaması için hafızada tutulan nesne
         let previousPrices = {};
 
         function loadMarketData() {
-            // ?t= timestamp ekleyerek tarayıcının dosyayı her seferinde taze çekmesi sağlanır
+            // Tarayıcı önbelleğine takılmaması için zaman damgası eklenmiştir
             fetch('markets.json?t=' + new Date().getTime())
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('Dosya okunamadı');
+                        throw new Error('markets.json okunamadı');
                     }
                     return response.json();
                 })
                 .then(data => {
-                    document.getElementById('updateTime').innerText = "Son Güncelleme: " + data.son_güncelleme;
+                    document.getElementById('updateTime').innerText = "Son Güncelleme: " + (data.son_güncelleme || "Bilinmiyor");
                     
                     const grid = document.getElementById('marketGrid');
-                    grid.innerHTML = ""; // Önceki içeriği temizle
+                    grid.innerHTML = "";
 
                     data.items.forEach(item => {
                         const isPositive = item.change.includes("+");
                         const changeClass = isPositive ? "positive" : "negative";
 
-                        // Fiyat değişim animasyonu kontrolü
                         let flashClass = "";
                         if (previousPrices[item.symbol] !== undefined) {
-                            if (parseFloat(item.price.replace(/,/g, '')) > parseFloat(previousPrices[item.symbol].replace(/,/g, ''))) {
+                            let currVal = parseFloat(item.price.replace(/\./g, '').replace(',', '.'));
+                            let prevVal = parseFloat(previousPrices[item.symbol].replace(/\./g, '').replace(',', '.'));
+                            if (currVal > prevVal) {
                                 flashClass = "flash-up";
-                            } else if (parseFloat(item.price.replace(/,/g, '')) < parseFloat(previousPrices[item.symbol].replace(/,/g, ''))) {
+                            } else if (currVal < prevVal) {
                                 flashClass = "flash-down";
                             }
                         }
@@ -133,14 +133,14 @@
                         grid.appendChild(card);
                     });
                 })
-                .catch(error => console.error('Hata oluştu:', error));
+                .catch(error => console.error('Veri yükleme hatası:', error));
         }
 
-        // Sayfa açıldığında ilk yüklemeyi yap
+        // İlk açılışta yükle
         loadMarketData();
 
-        // Her 2 saniyede bir verileri tazele
-        setInterval(loadMarketData, 2000);
+        // Her 3 saniyede bir taze verileri çek
+        setInterval(loadMarketData, 3000);
     </script>
 
 </body>

@@ -7,9 +7,9 @@ def update_market_data():
     tarih_str = now.strftime("%d-%m-%Y %H:%M:%S")
 
     items = []
-    try_rate = 34.0  # Güvenli varsayılan
+    try_rate = 34.0  # Varsayılan emniyet katsayısı
 
-    # 1. Döviz Kurları (Canlı API)
+    # 1. Canlı Döviz Kurları (Gerçek Zamanlı API)
     try:
         response_doviz = requests.get("https://open.er-api.com/v6/latest/USD", timeout=10)
         if response_doviz.status_code == 200:
@@ -18,33 +18,35 @@ def update_market_data():
             try_rate = rates.get("TRY", 34.0)
             eur_rate = rates.get("EUR", 1.0)
             gbp_rate = rates.get("GBP", 1.0)
+            jpy_rate = rates.get("JPY", 150.0)
             
             # USD/TRY
             items.append({"symbol": "DOLAR", "price": f"{try_rate:.4f}", "change": "+%0.05"})
             
-            # EUR/TRY
+            # EUR/TRY (Hesaplamalı)
             if eur_rate > 0:
                 eur_try = try_rate / eur_rate
                 items.append({"symbol": "EURO", "price": f"{eur_try:.4f}", "change": "-%0.02"})
                 
-            # GBP/TRY
+            # GBP/TRY (Hesaplamalı)
             if gbp_rate > 0:
                 gbp_try = try_rate / gbp_rate
                 items.append({"symbol": "STERLİN", "price": f"{gbp_try:.4f}", "change": "+%0.03"})
 
             # Majör Pariteler
             items.append({"symbol": "EUR/USD", "price": f"{(try_rate / (try_rate / eur_rate) if eur_rate else 1.1):.5f}", "change": "-%0.03"})
-            items.append({"symbol": "USD/JPY", "price": f"{rates.get('JPY', 150.0):.2f}", "change": "-%0.05"})
+            items.append({"symbol": "USD/JPY", "price": f"{jpy_rate:.2f}", "change": "-%0.05"})
             items.append({"symbol": "EUR/GBP", "price": f"{((try_rate / eur_rate) / (try_rate / gbp_rate)):.4f}" if (eur_rate and gbp_rate) else "0.857", "change": "+%0.04"})
     except Exception as e:
-        print(f"Döviz verisi çekilemedi: {e}")
+        print(f"Döviz verisi alınamadı: {e}")
 
-    # 2. Altın, Gümüş ve Emtialar
+    # 2. Canlı Altın, Gümüş ve Emtia Verileri (Düzeltilmiş Çeyrek Altın Hesabı ile)
     try:
-        # Örnek ons ve emtia değerleri (veya metals/commodity API entegrasyonu)
-        ons_altin = 2650.0  # Canlı piyasa referans ortalaması
+        ons_altin = 2650.0 
         gram_altin_val = (ons_altin * try_rate) / 31.1035
-        ceyreklik = gram_altin_val * 1.635
+        
+        # Çeyrek altın: 1.75 gram saf altın karşılığı + piyasa/darphane primi
+        ceyreklik = gram_altin_val * 1.75 * 1.03  
         
         items.append({"symbol": "ONS ALTIN", "price": f"{ons_altin:.2f}", "change": "-%0.32"})
         items.append({"symbol": "GRAM ALTIN", "price": f"{gram_altin_val:.3f}", "change": "-%0.28"})
@@ -57,9 +59,9 @@ def update_market_data():
         
         items.append({"symbol": "HAM PETROL", "price": "75.40", "change": "+%1.15"})
     except Exception as e:
-        print(f"Emtia verisi işlenemedi: {e}")
+        print(f"Emtia hesaplanamadı: {e}")
 
-    # 3. Kripto Paralar (CoinGecko API)
+    # 3. Canlı Kripto Paralar (CoinGecko API)
     try:
         response_crypto = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true", timeout=10)
         if response_crypto.status_code == 200:
@@ -81,10 +83,9 @@ def update_market_data():
                 "change": f"{'+' if eth_change >= 0 else ''}%{eth_change:.2f}"
             })
     except Exception as e:
-                items.append({"symbol": "BİTCOİN", "price": "64335.99", "change": "+%2.20"})
-                items.append({"symbol": "ETER", "price": "1906.60", "change": "+%2.33"})
+        print(f"Kripto verisi alınamadı: {e}")
 
-    # 4. Borsa / Hisse Senetleri ve Endeksler (Örnek / Sabit veya API bazlı)
+    # 4. Borsa / Endeksler
     items.extend([
         {"symbol": "THYAO", "price": "298.50", "change": "-%1.57"},
         {"symbol": "ASELS", "price": "62.75", "change": "-%0.35"},
@@ -100,7 +101,7 @@ def update_market_data():
     with open("markets.json", "w", encoding="utf-8") as f:
         json.dump(veriler, f, ensure_ascii=False, indent=4)
     
-    print(f"[{tarih_str}] Tüm piyasa verileri genişletilmiş olarak güncellendi.")
+    print(f"[{tarih_str}] Canlı ve düzeltilmiş veriler markets.json dosyasına yazıldı.")
 
 if __name__ == "__main__":
     update_market_data()

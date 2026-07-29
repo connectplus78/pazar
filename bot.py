@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
 import requests
+import xml.etree.ElementTree as ET
 
 def update_market_data():
     now = datetime.now()
@@ -9,49 +10,68 @@ def update_market_data():
     items = []
     try_rate = 34.0  
 
-    # 1. Tüm Dünya Döviz Kurları (Canlı API)
+    # 1. TCMB Resmi XML Servisinden Döviz Kurlarını Çekme
     try:
-        response_doviz = requests.get("https://open.er-api.com/v6/latest/USD", timeout=10)
-        if response_doviz.status_code == 200:
-            data_doviz = response_doviz.json()
-            rates = data_doviz.get("rates", {})
-            try_rate = rates.get("TRY", 34.0)
-            eur_rate = rates.get("EUR", 1.0)
-            gbp_rate = rates.get("GBP", 1.0)
-            jpy_rate = rates.get("JPY", 150.0)
-            chf_rate = rates.get("CHF", 0.9)
-            cad_rate = rates.get("CAD", 1.35)
-            aud_rate = rates.get("AUD", 1.5)
-            rub_rate = rates.get("RUB", 90.0)
-            cny_rate = rates.get("CNY", 7.2)
-            sar_rate = rates.get("SAR", 3.75)
+        tcmb_url = "https://www.tcmb.gov.tr/kurlar/today.xml"
+        response = requests.get(tcmb_url, timeout=10)
+        
+        if response.status_code == 200:
+            root = ET.fromstring(response.content)
             
-            # Türk Lirası Karşılıkları (TRY Bazlı)
-            items.append({"symbol": "DOLAR", "price": f"{try_rate:.4f}", "change": "+%0.05"})
-            
-            if eur_rate > 0:
-                items.append({"symbol": "EURO", "price": f"{(try_rate / eur_rate):.4f}", "change": "-%0.02"})
-            if gbp_rate > 0:
-                items.append({"symbol": "STERLİN", "price": f"{(try_rate / gbp_rate):.4f}", "change": "+%0.03"})
-            if chf_rate > 0:
-                items.append({"symbol": "İSVİÇRE FRANGI", "price": f"{(try_rate / chf_rate):.4f}", "change": "+%0.10"})
-            if cad_rate > 0:
-                items.append({"symbol": "KANADA DOLARI", "price": f"{(try_rate / cad_rate):.4f}", "change": "-%0.04"})
-            if aud_rate > 0:
-                items.append({"symbol": "AVUSTRALYA DOLARI", "price": f"{(try_rate / aud_rate):.4f}", "change": "+%0.08"})
-            if sar_rate > 0:
-                items.append({"symbol": "SUUDİ Rİyalİ", "price": f"{(try_rate / sar_rate):.4f}", "change": "%0.00"})
-            if rub_rate > 0:
-                items.append({"symbol": "RUS RUBLESİ", "price": f"{(try_rate / rub_rate):.4f}", "change": "-%0.15"})
-            if cny_rate > 0:
-                items.append({"symbol": "ÇİN YUANI", "price": f"{(try_rate / cny_rate):.4f}", "change": "+%0.02"})
+            # TCMB verilerinden kur yakalama yardımcı fonksiyonu
+            def get_tcmb_rate(code):
+                for currency in root.findall('Currency'):
+                    if currency.get('CurrencyCode') == code:
+                        forex_selling = currency.find('ForexSelling')
+                        if forex_selling is not None and forex_selling.text:
+                            return float(forex_selling.text)
+                return None
 
-            # Majör Pariteler
-            items.append({"symbol": "EUR/USD", "price": f"{(try_rate / (try_rate / eur_rate) if eur_rate else 1.1):.5f}", "change": "-%0.03"})
-            items.append({"symbol": "USD/JPY", "price": f"{jpy_rate:.2f}", "change": "-%0.05"})
-            items.append({"symbol": "EUR/GBP", "price": f"{((try_rate / eur_rate) / (try_rate / gbp_rate)):.4f}" if (eur_rate and gbp_rate) else "0.857", "change": "+%0.04"})
+            usd = get_tcmb_rate('USD')
+            eur = get_tcmb_rate('EUR')
+            gbp = get_tcmb_rate('GBP')
+            chf = get_tcmb_rate('CHF')
+            cad = get_tcmb_rate('CAD')
+            aud = get_tcmb_rate('AUD')
+            sar = get_tcmb_rate('SAR')
+            rub = get_tcmb_rate('RUB')
+            cny = get_tcmb_rate('CNY')
+            jpy = get_tcmb_rate('JPY') # Genellikle 100 JPY olarak gelir
+
+            if usd:
+                try_rate = usd
+                items.append({"symbol": "DOLAR", "price": f"{usd:.4f}", "change": "+%0.05"})
+            if eur:
+                items.append({"symbol": "EURO", "price": f"{eur:.4f}", "change": "-%0.02"})
+            if gbp:
+                items.append({"symbol": "STERLİN", "price": f"{gbp:.4f}", "change": "+%0.03"})
+            if chf:
+                items.append({"symbol": "İSVİÇRE FRANGI", "price": f"{chf:.4f}", "change": "+%0.10"})
+            if cad:
+                items.append({"symbol": "KANADA DOLARI", "price": f"{cad:.4f}", "change": "-%0.04"})
+            if aud:
+                items.append({"symbol": "AVUSTRALYA DOLARI", "price": f"{aud:.4f}", "change": "+%0.08"})
+            if sar:
+                items.append({"symbol": "SUUDİ RİYALİ", "price": f"{sar:.4f}", "change": "%0.00"})
+            if rub:
+                items.append({"symbol": "RUS RUBLESİ", "price": f"{rub:.4f}", "change": "-%0.15"})
+            if cny:
+                items.append({"symbol": "ÇİN YUANI", "price": f"{cny:.4f}", "change": "+%0.02"})
+            if jpy:
+                # TCMB 100 Japon Yeni olarak verir, teke çevirelim
+                jpy_single = jpy / 100.0
+                items.append({"symbol": "JAPON YENİ", "price": f"{jpy_single:.4f}", "change": "-%0.05"})
+
+            # Pariteler
+            if eur and usd:
+                items.append({"symbol": "EUR/USD", "price": f"{(eur / usd):.5f}", "change": "-%0.03"})
+            if usd and jpy:
+                items.append({"symbol": "USD/JPY", "price": f"{(100.0 / jpy * usd):.2f}" if jpy else "150.00", "change": "-%0.05"})
+            if eur and gbp:
+                items.append({"symbol": "EUR/GBP", "price": f"{(eur / gbp):.4f}", "change": "+%0.04"})
+
     except Exception as e:
-        print(f"Döviz verisi alınamadı: {e}")
+        print(f"TCMB veri çekme hatası: {e}")
 
     # 2. Altın, Gümüş ve Emtia Verileri (Net ve Kararlı Değerler)
     try:
@@ -106,7 +126,7 @@ def update_market_data():
     with open("markets.json", "w", encoding="utf-8") as f:
         json.dump(veriler, f, ensure_ascii=False, indent=4)
     
-    print(f"[{tarih_str}] Piyasalar başarıyla güncellendi.")
+    print(f"[{tarih_str}] TCMB verileriyle piyasalar güncellendi.")
 
 if __name__ == "__main__":
     update_market_data()

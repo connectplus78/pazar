@@ -1,32 +1,38 @@
 import json
-import time
 from datetime import datetime
-import requests  # Eğer canlı veri çekiyorsanız (requests kütüphanesi gerekir)
 
 def update_market_data():
-    # Türkiye saatine göre güncel tarih ve saat (Örn: 29-07-2026 17:35)
     now = datetime.now()
     tarih_str = now.strftime("%d-%m-%Y %H:%M")
 
-    # Buraya piyasa verilerinizi ekleyebilirsiniz (API'den çekebilir veya manuel güncelleyebilirsiniz)
     veriler = {
-        "last_update": tarih_str,
+        "son_güncelleme": tarih_str,
         "items": [
-            {"symbol": "USD/TRY", "price": "32.50", "change": "%+0.50"},
-            {"symbol": "EUR/TRY", "price": "35.20", "change": "%-0.10"},
-            {"symbol": "ALTIN", "price": "2450.00", "change": "%+1.20"},
-            {"symbol": "BIST 100", "price": "10500.00", "change": "%+0.85"}
+            {"symbol": "DOLAR", "price": "47.3972", "change": "+%0,04"},
+            {"symbol": "EURO", "price": "53.9956", "change": "-%0.01"},
+            {"symbol": "STERLİN", "price": "63.0026", "change": "+%0,03"},
+            {"symbol": "ONS ALTIN", "price": "4015.74", "change": "-%0.32"},
+            {"symbol": "GRAM ALTIN", "price": "6119.907", "change": "-%0,28"},
+            {"symbol": "ÇEYREK ALTIN", "price": "10006.05", "change": "-%0,28"},
+            {"symbol": "THYAO", "price": "314", "change": "-%1,57"},
+            {"symbol": "ASELS", "price": "356.75", "change": "-%0.35"},
+            {"symbol": "PETKM", "price": "19.95", "change": "-%1,53"},
+            {"symbol": "EUR/USD", "price": "1.13838", "change": "-%0.03"},
+            {"symbol": "USD/JPY", "price": "163.77", "change": "-%0.05"},
+            {"symbol": "EUR/GBP", "price": "0.857", "change": "+%0,04"},
+            {"symbol": "HAM PETROL", "price": "84.47", "change": "+%6,57"},
+            {"symbol": "ONS GÜMÜŞ", "price": "57.18", "change": "+%0,09"},
+            {"symbol": "GRAM GÜMÜŞ", "price": "87.1779", "change": "+%0,13"},
+            {"symbol": "BİTCOİN", "price": "64335.99", "change": "+%2,20"},
+            {"symbol": "ETER", "price": "1906.60", "change": "+%2,33"},
+            {"symbol": "BİST 100", "price": "13547.68", "change": "-%1,07"}
         ]
     }
 
-    # Verileri markets.json dosyasına kaydet
     with open("markets.json", "w", encoding="utf-8") as f:
         json.dump(veriler, f, ensure_ascii=False, indent=4)
     
     print(f"[{tarih_str}] markets.json başarıyla güncellendi.")
 
-# Botun çalışmasını istediğiniz döngü (Örn: Her 2 saniyede bir veya dakikada bir)
 if __name__ == "__main__":
-    while True:
-        update_market_data()
-        time.sleep(2)  # 2 saniyede bir güncelleme yapar (istediğiniz süreye göre ayarlayabilirsiniz)
+    update_market_data()

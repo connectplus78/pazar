@@ -1,9 +1,10 @@
 import json
+import time
 from datetime import datetime
 
 def update_market_data():
     now = datetime.now()
-    tarih_str = now.strftime("%d-%m-%Y %H:%M")
+    tarih_str = now.strftime("%d-%m-%Y %H:%M:%S") # Saniye göstergesi de ekledik
 
     veriler = {
         "son_güncelleme": tarih_str,
@@ -32,7 +33,9 @@ def update_market_data():
     with open("markets.json", "w", encoding="utf-8") as f:
         json.dump(veriler, f, ensure_ascii=False, indent=4)
     
-    print(f"[{tarih_str}] markets.json başarıyla güncellendi.")
+    print(f"[{tarih_str}] markets.json güncellendi.")
 
 if __name__ == "__main__":
-    update_market_data()
+    while True:
+        update_market_data()
+        time.sleep(5)  # 5 saniyede bir döngüyü tekrar eder (süreyi değiştirebilirsiniz)

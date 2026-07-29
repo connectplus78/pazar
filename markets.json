@@ -1,5 +1,5 @@
 {
-    "son_güncelleme": "29-07-2026 15:19:37",
+    "son_güncelleme": "29-07-2026 15:24:50",
     "items": [
         {
             "symbol": "DOLAR",
@@ -63,13 +63,13 @@
         },
         {
             "symbol": "BİTCOİN",
-            "price": "64,063.00",
-            "change": "+%1.13"
+            "price": "63,980.00",
+            "change": "+%0.44"
         },
         {
             "symbol": "ETER",
-            "price": "1,895.17",
-            "change": "+%0.40"
+            "price": "1,892.09",
+            "change": "%-0.91"
         },
         {
             "symbol": "THYAO",

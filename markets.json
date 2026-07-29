@@ -1,95 +1,95 @@
 {
-    "son_güncelleme": "29-07-2026 15:06:20",
+    "son_güncelleme": "29-07-2026 15:19:37",
     "items": [
         {
             "symbol": "DOLAR",
-            "price": "47.3972",
-            "change": "+%0,04"
+            "price": "47.3863",
+            "change": "+%0.05"
         },
         {
             "symbol": "EURO",
-            "price": "53.9956",
-            "change": "-%0.01"
+            "price": "53.9307",
+            "change": "-%0.02"
         },
         {
             "symbol": "STERLİN",
-            "price": "63.0026",
-            "change": "+%0,03"
-        },
-        {
-            "symbol": "ONS ALTIN",
-            "price": "4015.74",
-            "change": "-%0.32"
-        },
-        {
-            "symbol": "GRAM ALTIN",
-            "price": "6119.907",
-            "change": "-%0,28"
-        },
-        {
-            "symbol": "ÇEYREK ALTIN",
-            "price": "10006.05",
-            "change": "-%0,28"
-        },
-        {
-            "symbol": "THYAO",
-            "price": "314",
-            "change": "-%1,57"
-        },
-        {
-            "symbol": "ASELS",
-            "price": "356.75",
-            "change": "-%0.35"
-        },
-        {
-            "symbol": "PETKM",
-            "price": "19.95",
-            "change": "-%1,53"
+            "price": "62.9723",
+            "change": "+%0.03"
         },
         {
             "symbol": "EUR/USD",
-            "price": "1.13838",
+            "price": "0.87865",
             "change": "-%0.03"
         },
         {
             "symbol": "USD/JPY",
-            "price": "163.77",
+            "price": "163.83",
             "change": "-%0.05"
         },
         {
             "symbol": "EUR/GBP",
-            "price": "0.857",
-            "change": "+%0,04"
+            "price": "0.8564",
+            "change": "+%0.04"
         },
         {
-            "symbol": "HAM PETROL",
-            "price": "84.47",
-            "change": "+%6,57"
+            "symbol": "ONS ALTIN",
+            "price": "2650.00",
+            "change": "-%0.32"
+        },
+        {
+            "symbol": "GRAM ALTIN",
+            "price": "4037.283",
+            "change": "-%0.28"
+        },
+        {
+            "symbol": "ÇEYREK ALTIN",
+            "price": "6600.96",
+            "change": "-%0.28"
         },
         {
             "symbol": "ONS GÜMÜŞ",
-            "price": "57.18",
-            "change": "+%0,09"
+            "price": "31.50",
+            "change": "+%0.09"
         },
         {
             "symbol": "GRAM GÜMÜŞ",
-            "price": "87.1779",
-            "change": "+%0,13"
+            "price": "47.9904",
+            "change": "+%0.13"
+        },
+        {
+            "symbol": "HAM PETROL",
+            "price": "75.40",
+            "change": "+%1.15"
         },
         {
             "symbol": "BİTCOİN",
-            "price": "64335.99",
-            "change": "+%2,20"
+            "price": "64,063.00",
+            "change": "+%1.13"
         },
         {
             "symbol": "ETER",
-            "price": "1906.60",
-            "change": "+%2,33"
+            "price": "1,895.17",
+            "change": "+%0.40"
         },
         {
-            "symbol": "BIST 100",
-            "price": "13547.68",
-            "change": "-%1,07"
+            "symbol": "THYAO",
+            "price": "298.50",
+            "change": "-%1.57"
+        },
+        {
+            "symbol": "ASELS",
+            "price": "62.75",
+            "change": "-%0.35"
+        },
+        {
+            "symbol": "PETKM",
+            "price": "21.95",
+            "change": "-%1.53"
+        },
+        {
+            "symbol": "BİST 100",
+            "price": "9850.40",
+            "change": "-%1.07"
         }
     ]
 }

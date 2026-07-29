@@ -3,9 +3,10 @@ from datetime import datetime
 import requests
 
 def update_market_data():
+    # Belirttiğiniz v3 API endpoint'i kullanılıyor
     url = "https://finans.truncgil.com/v3/today.json"
 
-    print("Canlı piyasa verileri v4 API'den çekiliyor...")
+    print("Canlı piyasa verileri v3 API'den çekiliyor...")
     try:
         response = requests.get(url, timeout=15)
         if response.status_code == 200:
@@ -39,7 +40,7 @@ def update_market_data():
             with open("markets.json", "w", encoding="utf-8") as f:
                 json.dump(veriler, f, ensure_ascii=False, indent=4)
                 
-            print(f"Başarılı! v4 API üzerinden {len(items)} birim markets.json dosyasına kaydedildi.")
+            print(f"Başarılı! v3 API üzerinden {len(items)} birim markets.json dosyasına kaydedildi.")
 
         else:
             print(f"Hata! Bağlantı kodu: {response.status_code}")

@@ -77,8 +77,9 @@ def update_market_data():
                 """
                 kart_sayisi += 1
 
+            # DÜZELTME BURADA YAPILDI: "son_güncelleme" yerine "last_update" yazıldı
             veriler = {
-                "son_güncelleme": guncelleme,
+                "last_update": guncelleme,
                 "items": items
             }
             with open("markets.json", "w", encoding="utf-8") as f:

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canlı Piyasalar - Paratic Clone</title>
+    <style>
+        :root {
+            --bg-color: #12141c;
+            --card-bg: #1a1d29;
+            --text-color: #e1e7ed;
+            --text-muted: #8b949e;
+            --border-color: #2d333b;
+            --green: #2ea043;
+            --red: #da3633;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        .update-time {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+        .market-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        .market-table th, .market-table td {
+            padding: 14px 18px;
+            text-align: left;
+        }
+        .market-table th {
+            background-color: rgba(255, 255, 255, 0.02);
+            color: var(--text-muted);
+            font-size: 12px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .market-table tr:not(:last-child) td {
+            border-bottom: 1px solid var(--border-color);
+        }
+        .symbol {
+            font-weight: bold;
+        }
+        .name {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+        .price {
+            font-weight: 600;
+        }
+        .change {
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: inline-block;
+            font-size: 13px;
+        }
+        .positive {
+            color: var(--green);
+            background-color: rgba(46, 160, 67, 0.1);
+        }
+        .negative {
+            color: var(--red);
+            background-color: rgba(218, 54, 51, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Canlı Piyasa Ekranı</h1>
+    <div class="update-time" id="updateTime">Yükleniyor...</div>
+
+    <table class="market-table">
+        <thead>
+            <tr>
+                <th>Sembol / Varlık</th>
+                <th>Son Fiyat</th>
+                <th>Değişim (%)</th>
+            </tr>
+        </thead>
+        <tbody id="marketBody">
+            <tr><td colspan="3" style="text-align: center;">Veriler yükleniyor...</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    async function loadMarketData() {
+        try {
+            const response = await fetch('markets.json?' + new Date().getTime());
+            const data = await response.json();
+            
+            document.getElementById('updateTime').innerText = "Son Güncelleme: " + data.last_update;
+            
+            const tbody = document.getElementById('marketBody');
+            tbody.innerHTML = '';
+            
+            data.items.forEach(item => {
+                const isPos = item.change.includes('+');
+                const changeClass = isPos ? 'positive' : 'negative';
+                
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>
+                        <div class="symbol">${item.symbol}</div>
+                        <div class="name">${item.name}</div>
+                    </td>
+                    <td class="price">${item.price}</td>
+                    <td><span class="change ${changeClass}">${item.change}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        } catch (error) {
+            console.error('Veri yüklenemedi:', error);
+            document.getElementById('updateTime').innerText = "Veriler yüklenirken hata oluştu.";
+        }
+    }
+
+    loadMarketData();
+    // Her 30 saniyede bir arayüzü yenile
+    setInterval(loadMarketData, 30000);
+</script>
+
+</body>
+</html>

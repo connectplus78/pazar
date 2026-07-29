@@ -1,5 +1,5 @@
 {
-    "son_güncelleme": "29-07-2026 16:12:48",
+    "son_güncelleme": "29-07-2026 16:16:04",
     "items": [
         {
             "symbol": "DOLAR",
@@ -59,47 +59,47 @@
         {
             "symbol": "ONS ALTIN",
             "price": "2,410.00",
-            "change": "+%0.42"
+            "change": "-%0.52"
         },
         {
             "symbol": "GRAM ALTIN",
-            "price": "3,671.64",
-            "change": "+%0.35"
+            "price": "3,671.643",
+            "change": "-%0.47"
         },
         {
             "symbol": "ÇEYREK ALTIN",
             "price": "6,778.77",
-            "change": "+%0.35"
+            "change": "-%0.47"
         },
         {
             "symbol": "YARIM ALTIN",
             "price": "13,557.54",
-            "change": "+%0.35"
+            "change": "-%0.47"
         },
         {
             "symbol": "ATA ALTIN",
             "price": "27,115.08",
-            "change": "+%0.35"
-        },
-        {
-            "symbol": "GRAM GÜMÜŞ",
-            "price": "33.20",
-            "change": "+%0.23"
-        },
-        {
-            "symbol": "BİTCOİN",
-            "price": "63,893.00",
-            "change": "+%0.20"
-        },
-        {
-            "symbol": "ETER",
-            "price": "1,890.29",
-            "change": "%-1.24"
+            "change": "-%0.47"
         },
         {
             "symbol": "ONS GÜMÜŞ",
             "price": "31.50",
             "change": "+%0.19"
+        },
+        {
+            "symbol": "GRAM GÜMÜŞ",
+            "price": "47.99",
+            "change": "+%0.23"
+        },
+        {
+            "symbol": "BİTCOİN",
+            "price": "63,907.00",
+            "change": "+%0.23"
+        },
+        {
+            "symbol": "ETER",
+            "price": "1,890.73",
+            "change": "%-1.21"
         },
         {
             "symbol": "HAM PETROL",
@@ -123,7 +123,7 @@
         },
         {
             "symbol": "BİST 100",
-            "price": "10450.20",
+            "price": "10,450.20",
             "change": "+%1.12"
         }
     ]

@@ -1,64 +1,69 @@
 {
-    "son_güncelleme": "29-07-2026 15:57:52",
+    "son_güncelleme": "29-07-2026 16:00:29",
     "items": [
         {
             "symbol": "DOLAR",
-            "price": "47.3863",
+            "price": "47.3927",
             "change": "+%0.05"
         },
         {
             "symbol": "EURO",
-            "price": "53.9307",
+            "price": "53.9842",
             "change": "-%0.02"
         },
         {
             "symbol": "STERLİN",
-            "price": "62.9723",
+            "price": "63.1279",
             "change": "+%0.03"
         },
         {
             "symbol": "İSVİÇRE FRANGI",
-            "price": "57.8319",
+            "price": "57.9800",
             "change": "+%0.10"
         },
         {
             "symbol": "KANADA DOLARI",
-            "price": "33.5971",
+            "price": "33.6596",
             "change": "-%0.04"
         },
         {
             "symbol": "AVUSTRALYA DOLARI",
-            "price": "33.0500",
+            "price": "32.9919",
             "change": "+%0.08"
         },
         {
-            "symbol": "SUUDİ Rİyalİ",
-            "price": "12.6363",
+            "symbol": "SUUDİ RİYALİ",
+            "price": "12.6244",
             "change": "%0.00"
         },
         {
             "symbol": "RUS RUBLESİ",
-            "price": "0.6030",
+            "price": "0.6001",
             "change": "-%0.15"
         },
         {
             "symbol": "ÇİN YUANI",
-            "price": "6.9907",
+            "price": "7.0430",
             "change": "+%0.02"
         },
         {
+            "symbol": "JAPON YENİ",
+            "price": "0.2903",
+            "change": "-%0.05"
+        },
+        {
             "symbol": "EUR/USD",
-            "price": "0.87865",
+            "price": "1.13908",
             "change": "-%0.03"
         },
         {
             "symbol": "USD/JPY",
-            "price": "163.83",
+            "price": "163.23",
             "change": "-%0.05"
         },
         {
             "symbol": "EUR/GBP",
-            "price": "0.8564",
+            "price": "0.8552",
             "change": "+%0.04"
         },
         {
@@ -93,13 +98,13 @@
         },
         {
             "symbol": "BİTCOİN",
-            "price": "63,852.00",
-            "change": "+%0.08"
+            "price": "63,870.00",
+            "change": "+%0.02"
         },
         {
             "symbol": "ETER",
-            "price": "1,886.78",
-            "change": "%-1.40"
+            "price": "1,888.51",
+            "change": "%-1.49"
         },
         {
             "symbol": "THYAO",

@@ -3,150 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connect Plus - Canlı Piyasa Verileri</title>
+    <title>Connect Plus Piyasa</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome İkonları -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
+        :root {
+            --bg-color: #0b131e;
+            --card-bg: #131f33;
+            --card-hover: #1a2a44;
+            --text-color: #ffffff;
+            --title-color: #a0aec0;
+            --border-color: #1e293b;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --card-hover: #e2e8f0;
+            --text-color: #0f172a;
+            --title-color: #64748b;
+            --border-color: #cbd5e1;
+        }
+
         body {
-            background-color: #0d1117;
-            color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            padding-top: 20px;
+            padding-bottom: 40px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .main-content {
+            flex: 1;
+        }
+        .navbar-custom {
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+        .navbar-brand-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        @keyframes pulseDot {
+            0% { transform: scale(0.95); opacity: 1; box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { transform: scale(1); opacity: 0.6; box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { transform: scale(0.95); opacity: 1; box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+        .live-dot {
+            width: 14px;
+            height: 14px;
+            background-color: #ef4444;
+            border-radius: 50%;
+            animation: pulseDot 1.5s infinite;
+        }
+
+        .navbar-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
             margin: 0;
-            padding: 20px;
+            background: linear-gradient(90deg, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        h1 {
+        .theme-toggle-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+        .theme-toggle-btn:hover {
+            transform: scale(1.05);
+            background-color: var(--card-hover);
+        }
+        .market-card {
+            background-color: var(--card-bg);
+            border: none;
+            border-radius: 10px;
             text-align: center;
-            color: #ff9800;
-            margin-bottom: 5px;
+            padding: 1.5rem 0.5rem;
+            height: 100%;
+            transition: transform 0.2s, background-color 0.3s ease;
         }
-        .update-time {
-            text-align: center;
-            color: #8b949e;
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .card {
-            background-color: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.2s, background-color 0.5s;
-        }
-        .card:hover {
+        .market-card:hover {
             transform: translateY(-3px);
-            border-color: #ff9800;
+            background-color: var(--card-hover);
         }
-        .symbol {
-            font-size: 16px;
-            color: #ffa726;
-            font-weight: bold;
-            margin-bottom: 10px;
+        .market-title {
+            color: var(--title-color);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.5px;
         }
-        .price {
-            font-size: 26px;
-            font-weight: bold;
-            margin-bottom: 8px;
+        .market-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
         }
-        .change {
-            font-size: 14px;
+        .market-change {
+            font-size: 0.95rem;
             font-weight: 600;
         }
-        .positive {
-            color: #3fb950;
+        .text-up {
+            color: #22c55e !important;
         }
-        .negative {
-            color: #f85149;
+        .text-down {
+            color: #ef4444 !important;
         }
-        /* Fiyat değişim animasyonları */
-        @keyframes flash-green {
-            0% { background-color: #238636; }
-            100% { background-color: #161b22; }
+        
+        @keyframes flashGreen {
+            0% { background-color: #166534; box-shadow: 0 0 20px #22c55e; }
+            100% { background-color: var(--card-bg); box-shadow: none; }
         }
-        @keyframes flash-red {
-            0% { background-color: #da3633; }
-            100% { background-color: #161b22; }
+        .flash-green {
+            animation: flashGreen 1.2s ease-out;
         }
-        .flash-up {
-            animation: flash-green 1s ease;
+
+        @keyframes flashRed {
+            0% { background-color: #991b1b; box-shadow: 0 0 20px #ef4444; }
+            100% { background-color: var(--card-bg); box-shadow: none; }
         }
-        .flash-down {
-            animation: flash-red 1s ease;
+        .flash-red {
+            animation: flashRed 1.2s ease-out;
+        }
+
+        /* Alt Footer Alanı */
+        .footer-custom {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--title-color);
+            font-size: 0.9rem;
+        }
+        .footer-brand {
+            color: #38bdf8;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .footer-update {
+            margin-top: 0.3rem;
+            font-size: 0.85rem;
         }
     </style>
 </head>
 <body>
 
-    <h1>Connect Plus Piyasa</h1>
-    <div class="update-time" id="updateTime">Son Güncelleme: Yükleniyor...</div>
+    <div class="main-content">
+        <!-- Üst Bar -->
+        <div class="navbar-custom container">
+            <div class="navbar-brand-wrapper">
+                <div class="live-dot"></div>
+                <h2 class="navbar-title">Connect Plus Piyasa</h2>
+            </div>
+            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Tema Değiştir">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+            </button>
+        </div>
 
-    <div class="grid-container" id="marketGrid">
-        <!-- Kartlar dinamik olarak yüklenecek -->
+        <div class="container">
+            <!-- Kartların Listeleneceği Alan -->
+            <div id="marketsContainer" class="row g-3 justify-content-center">
+                <div class="col-12 text-center py-5">
+                    <div class="spinner-border text-secondary" role="status">
+                        <span class="visually-hidden">Yükleniyor...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alt Footer -->
+    <div class="container">
+        <footer class="footer-custom">
+            <div>© <span id="currentYear">2026</span> <span class="footer-brand">Connect Plus</span> Özel Yayınıdır.</div>
+            <div class="footer-update">Son Güncelleme: <span id="lastUpdateTime">Yükleniyor...</span></div>
+        </footer>
     </div>
 
     <script>
+        const jsonUrl = 'https://raw.githubusercontent.com/connectplus78/pazar/refs/heads/main/markets.json';
         let previousPrices = {};
 
-        function loadMarketData() {
-            // Önbelleğe takılmaması için dinamik zaman damgası eklenmiştir
-            fetch('markets.json?t=' + new Date().getTime())
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('markets.json dosyasına ulaşılamadı');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    document.getElementById('updateTime').innerText = "Son Güncelleme: " + (data.son_güncelleme || "Bilinmiyor");
-                    
-                    const grid = document.getElementById('marketGrid');
-                    grid.innerHTML = "";
-
-                    if (!data.items || data.items.length === 0) {
-                        grid.innerHTML = "<div style='grid-column: 1/-1; text-align: center; color: #8b949e;'>Görüntülenecek veri bulunamadı.</div>";
-                        return;
-                    }
-
-                    data.items.forEach(item => {
-                        const changeStr = String(item.change || "");
-                        const isPositive = !changeStr.includes("-");
-                        const changeClass = isPositive ? "positive" : "negative";
-
-                        let flashClass = "";
-                        if (previousPrices[item.symbol] !== undefined) {
-                            let currVal = parseFloat(String(item.price).replace(/\./g, '').replace(',', '.'));
-                            let prevVal = parseFloat(String(previousPrices[item.symbol]).replace(/\./g, '').replace(',', '.'));
-                            if (!isNaN(currVal) && !isNaN(prevVal)) {
-                                if (currVal > prevVal) flashClass = "flash-up";
-                                else if (currVal < prevVal) flashClass = "flash-down";
-                            }
-                        }
-                        previousPrices[item.symbol] = item.price;
-
-                        const card = document.createElement('div');
-                        card.className = `card ${flashClass}`;
-                        card.innerHTML = `
-                            <div class="symbol">${item.symbol}</div>
-                            <div class="price">${item.price}</div>
-                            <div class="change ${changeClass}">${item.change}</div>
-                        `;
-                        grid.appendChild(card);
-                    });
-                })
-                .catch(error => console.error('Veri yükleme hatası:', error));
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('themeIcon');
+            
+            if (html.getAttribute('data-theme') === 'light') {
+                html.removeAttribute('data-theme');
+                themeIcon.className = 'fa-solid fa-moon';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                html.setAttribute('data-theme', 'light');
+                themeIcon.className = 'fa-solid fa-sun';
+                localStorage.setItem('theme', 'light');
+            }
         }
 
-        // Sayfa açıldığında ilk yükleme
-        loadMarketData();
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                document.getElementById('themeIcon').className = 'fa-solid fa-sun';
+            }
 
-        // Her 3 saniyede bir verileri tazeçe çek
-        setInterval(loadMarketData, 3000);
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            fetchMarkets();
+            setInterval(fetchMarkets, 2000);
+        });
+
+        async function fetchMarkets() {
+            try {
+                const response = await fetch(jsonUrl + '?t=' + new Date().getTime());
+                if (!response.ok) throw new Error('Veri alınamadı.');
+                
+                const data = await response.json();
+                
+                if (data.last_update) {
+                    document.getElementById('lastUpdateTime').textContent = data.last_update;
+                }
+                
+                let allItems = [];
+                if (data && Array.isArray(data.items)) {
+                    allItems = data.items;
+                } else if (Array.isArray(data)) {
+                    allItems = data;
+                }
+
+                if (!allItems || allItems.length === 0) return;
+
+                const container = document.getElementById('marketsContainer');
+                const isFirstLoad = Object.keys(previousPrices).length === 0;
+
+                container.innerHTML = allItems.map(item => {
+                    const symbol = item.symbol || 'PİYASA';
+                    const price = item.price || '0.00';
+                    const changeStr = item.change || '%0.00';
+                    
+                    const isUp = !changeStr.includes('-');
+                    const changeClass = isUp ? 'text-up' : 'text-down';
+                    const iconClass = isUp ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down';
+
+                    let flashClass = '';
+                    if (!isFirstLoad && previousPrices[symbol] !== undefined) {
+                        const cleanOld = parseFloat(String(previousPrices[symbol]).replace(/\./g, '').replace(',', '.'));
+                        const cleanNew = parseFloat(String(price).replace(/\./g, '').replace(',', '.'));
+                        
+                        if (!isNaN(cleanOld) && !isNaN(cleanNew)) {
+                            if (cleanNew > cleanOld) {
+                                flashClass = 'flash-green';
+                            } else if (cleanNew < cleanOld) {
+                                flashClass = 'flash-red';
+                            }
+                        }
+                    }
+                    previousPrices[symbol] = price;
+
+                    return `
+                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+                            <div class="card market-card ${flashClass}">
+                                <div class="market-title">${symbol}</div>
+                                <div class="market-price">${price}</div>
+                                <div class="market-change ${changeClass}">
+                                    <i class="${iconClass} me-1"></i>${changeStr}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+            } catch (error) {
+                console.error("Veri çekme hatası:", error);
+            }
+        }
     </script>
-
 </body>
 </html>

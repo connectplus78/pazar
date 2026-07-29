@@ -36,19 +36,21 @@ def update_market_data():
     except Exception as e:
         print(f"Döviz verisi alınamadı: {e}")
 
-    # 2. Altın, Gümüş ve Emtia Verileri (Doğru ve Dengelenmiş Baz Fiyatlar)
+    # 2. Altın, Gümüş ve Emtia Verileri (Doğrudan Gerçekçi TL Bazlı Hesaplama)
     try:
-        # Güncel piyasa ons altın referansı (Örn: ~2350-2400 bandı)
-        ons_altin = 2380.50 
-        gram_altin_val = (ons_altin * try_rate) / 31.1035
-        ceyreklik = gram_altin_val * 1.75 * 1.03  
+        # Türkiye piyasasındaki güncel baz gram altın fiyatı üzerinden net hesaplama
+        gram_altin_val = 2650.0 # Örnek güncel gram altın TL fiyatı (isteğinize göre güncelleyebilirsiniz)
+        ons_altin = (gram_altin_val * 31.1035) / try_rate
+        
+        # Çeyrek altın: 1.75 gram saf altın karşılığı + darphane işçilik primi
+        ceyreklik = gram_altin_val * 1.75 * 1.05  
         
         items.append({"symbol": "ONS ALTIN", "price": f"{ons_altin:.2f}", "change": "+%0.42"})
         items.append({"symbol": "GRAM ALTIN", "price": f"{gram_altin_val:.2f}", "change": "+%0.35"})
         items.append({"symbol": "ÇEYREK ALTIN", "price": f"{ceyreklik:.2f}", "change": "+%0.35"})
         
-        ons_gumus = 28.50
-        gram_gumus_val = (ons_gumus * try_rate) / 31.1035
+        gram_gumus_val = 32.50 # Gram gümüş TL fiyatı
+        ons_gumus = (gram_gumus_val * 31.1035) / try_rate
         items.append({"symbol": "ONS GÜMÜŞ", "price": f"{ons_gumus:.2f}", "change": "+%0.19"})
         items.append({"symbol": "GRAM GÜMÜŞ", "price": f"{gram_gumus_val:.2f}", "change": "+%0.23"})
         
@@ -96,7 +98,7 @@ def update_market_data():
     with open("markets.json", "w", encoding="utf-8") as f:
         json.dump(veriler, f, ensure_ascii=False, indent=4)
     
-    print(f"[{tarih_str}] Düzeltilmiş ve dengeli veriler markets.json dosyasına yazıldı.")
+    print(f"[{tarih_str}] Altın ve döviz oranları düzeltilerek güncellendi.")
 
 if __name__ == "__main__":
     update_market_data()

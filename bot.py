@@ -36,27 +36,19 @@ def update_market_data():
     except Exception as e:
         print(f"Döviz verisi alınamadı: {e}")
 
-    # 2. Altın, Gümüş ve Emtia Verileri (Doğrudan Gerçekçi TL Bazlı Hesaplama)
+    # 2. Altın, Gümüş ve Emtia Verileri (Sabit, Net ve Kararlı Fiyatlar)
     try:
-        # Türkiye piyasasındaki güncel baz gram altın fiyatı üzerinden net hesaplama
-        gram_altin_val = 2650.0 # Örnek güncel gram altın TL fiyatı (isteğinize göre güncelleyebilirsiniz)
-        ons_altin = (gram_altin_val * 31.1035) / try_rate
+        # Burada rakamlar formüller yüzünden bozulmaz, doğrudan istediğimiz net değerler yazılır
+        items.append({"symbol": "ONS ALTIN", "price": "2380.50", "change": "+%0.42"})
+        items.append({"symbol": "GRAM ALTIN", "price": "2650.00", "change": "+%0.35"})
+        items.append({"symbol": "ÇEYREK ALTIN", "price": "4350.00", "change": "+%0.35"})
         
-        # Çeyrek altın: 1.75 gram saf altın karşılığı + darphane işçilik primi
-        ceyreklik = gram_altin_val * 1.75 * 1.05  
-        
-        items.append({"symbol": "ONS ALTIN", "price": f"{ons_altin:.2f}", "change": "+%0.42"})
-        items.append({"symbol": "GRAM ALTIN", "price": f"{gram_altin_val:.2f}", "change": "+%0.35"})
-        items.append({"symbol": "ÇEYREK ALTIN", "price": f"{ceyreklik:.2f}", "change": "+%0.35"})
-        
-        gram_gumus_val = 32.50 # Gram gümüş TL fiyatı
-        ons_gumus = (gram_gumus_val * 31.1035) / try_rate
-        items.append({"symbol": "ONS GÜMÜŞ", "price": f"{ons_gumus:.2f}", "change": "+%0.19"})
-        items.append({"symbol": "GRAM GÜMÜŞ", "price": f"{gram_gumus_val:.2f}", "change": "+%0.23"})
+        items.append({"symbol": "ONS GÜMÜŞ", "price": "28.50", "change": "+%0.19"})
+        items.append({"symbol": "GRAM GÜMÜŞ", "price": "32.50", "change": "+%0.23"})
         
         items.append({"symbol": "HAM PETROL", "price": "78.50", "change": "+%0.85"})
     except Exception as e:
-        print(f"Emtia hesaplanamadı: {e}")
+        print(f"Emtia işlenemedi: {e}")
 
     # 3. Canlı Kripto Paralar (CoinGecko API)
     try:
@@ -98,7 +90,7 @@ def update_market_data():
     with open("markets.json", "w", encoding="utf-8") as f:
         json.dump(veriler, f, ensure_ascii=False, indent=4)
     
-    print(f"[{tarih_str}] Altın ve döviz oranları düzeltilerek güncellendi.")
+    print(f"[{tarih_str}] Kararlı veriler başarıyla güncellendi.")
 
 if __name__ == "__main__":
     update_market_data()

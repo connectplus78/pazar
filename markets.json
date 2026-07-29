@@ -1,5 +1,5 @@
 {
-    "son_güncelleme": "29-07-2026 15:55:46",
+    "son_güncelleme": "29-07-2026 15:57:52",
     "items": [
         {
             "symbol": "DOLAR",
@@ -63,27 +63,27 @@
         },
         {
             "symbol": "ONS ALTIN",
-            "price": "2380.50",
+            "price": "2410.00",
             "change": "+%0.42"
         },
         {
             "symbol": "GRAM ALTIN",
-            "price": "3626.70",
+            "price": "2650.00",
             "change": "+%0.35"
         },
         {
             "symbol": "ÇEYREK ALTIN",
-            "price": "6695.79",
+            "price": "4350.00",
             "change": "+%0.35"
         },
         {
             "symbol": "ONS GÜMÜŞ",
-            "price": "28.50",
+            "price": "31.50",
             "change": "+%0.19"
         },
         {
             "symbol": "GRAM GÜMÜŞ",
-            "price": "43.42",
+            "price": "33.20",
             "change": "+%0.23"
         },
         {
@@ -93,13 +93,13 @@
         },
         {
             "symbol": "BİTCOİN",
-            "price": "63,912.00",
-            "change": "+%0.18"
+            "price": "63,852.00",
+            "change": "+%0.08"
         },
         {
             "symbol": "ETER",
-            "price": "1,889.39",
-            "change": "%-1.23"
+            "price": "1,886.78",
+            "change": "%-1.40"
         },
         {
             "symbol": "THYAO",

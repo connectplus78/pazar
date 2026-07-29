@@ -1,5 +1,5 @@
 {
-    "son_güncelleme": "29-07-2026 15:24:50",
+    "son_güncelleme": "29-07-2026 15:33:06",
     "items": [
         {
             "symbol": "DOLAR",
@@ -43,7 +43,7 @@
         },
         {
             "symbol": "ÇEYREK ALTIN",
-            "price": "6600.96",
+            "price": "7277.20",
             "change": "-%0.28"
         },
         {
@@ -63,13 +63,13 @@
         },
         {
             "symbol": "BİTCOİN",
-            "price": "63,980.00",
-            "change": "+%0.44"
+            "price": "64,012.00",
+            "change": "+%0.52"
         },
         {
             "symbol": "ETER",
-            "price": "1,892.09",
-            "change": "%-0.91"
+            "price": "1,892.82",
+            "change": "%-0.86"
         },
         {
             "symbol": "THYAO",

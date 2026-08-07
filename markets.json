@@ -1,90 +1,90 @@
 {
-    "last_update": "2026-08-07 16:48:01",
-    "son_güncelleme": "2026-08-07 16:48:01",
+    "last_update": "2026-08-07 17:41:01",
+    "son_güncelleme": "2026-08-07 17:41:01",
     "items": [
         {
             "symbol": "USD",
-            "price": "47.7066",
+            "price": "47.7091",
             "change": "0.17"
         },
         {
             "symbol": "EUR",
-            "price": "55.2534",
-            "change": "0.42"
+            "price": "55.1805",
+            "change": "0.3"
         },
         {
             "symbol": "GBP",
-            "price": "64.4791",
-            "change": "0.46"
+            "price": "64.4236",
+            "change": "0.38"
         },
         {
             "symbol": "CHF",
-            "price": "59.1094",
-            "change": "0.88"
+            "price": "59.0793",
+            "change": "0.83"
         },
         {
             "symbol": "CAD",
-            "price": "34.1983",
-            "change": "0.67"
+            "price": "34.2252",
+            "change": "0.75"
         },
         {
             "symbol": "RUB",
-            "price": "0.5814",
-            "change": "0.41"
+            "price": "0.5816",
+            "change": "0.46"
         },
         {
             "symbol": "AED",
-            "price": "12.9947",
+            "price": "12.9942",
             "change": "0.21"
         },
         {
             "symbol": "AUD",
-            "price": "33.7286",
-            "change": "0.69"
+            "price": "33.7058",
+            "change": "0.62"
         },
         {
             "symbol": "DKK",
-            "price": "7.3854",
-            "change": "0.61"
+            "price": "7.3767",
+            "change": "0.49"
         },
         {
             "symbol": "SEK",
-            "price": "5.044",
-            "change": "0.82"
+            "price": "5.0378",
+            "change": "0.69"
         },
         {
             "symbol": "NOK",
-            "price": "5.0301",
-            "change": "0.8"
+            "price": "5.0272",
+            "change": "0.72"
         },
         {
             "symbol": "JPY",
-            "price": "0.003037",
+            "price": "0.0030320000000000004",
             "change": "0.01"
         },
         {
             "symbol": "KWD",
-            "price": "154.8392",
-            "change": "0.58"
+            "price": "154.8324",
+            "change": "0.57"
         },
         {
             "symbol": "ZAR",
-            "price": "2.954",
-            "change": "1.5"
+            "price": "2.953",
+            "change": "1.46"
         },
         {
             "symbol": "BHD",
-            "price": "126.5226",
+            "price": "126.5292",
             "change": "0.16"
         },
         {
             "symbol": "LYD",
-            "price": "7.5009",
+            "price": "7.5013",
             "change": "1.06"
         },
         {
             "symbol": "SAR",
-            "price": "12.7077",
+            "price": "12.7072",
             "change": "0.23"
         },
         {
@@ -94,83 +94,83 @@
         },
         {
             "symbol": "ILS",
-            "price": "15.9287",
-            "change": "0.9"
+            "price": "15.9158",
+            "change": "0.82"
         },
         {
             "symbol": "INR",
-            "price": "0.5017",
-            "change": "0.43"
+            "price": "0.5016",
+            "change": "0.4"
         },
         {
             "symbol": "MXN",
-            "price": "2.7856",
-            "change": "0.66"
+            "price": "2.7845",
+            "change": "0.62"
         },
         {
             "symbol": "HUF",
-            "price": "0.1521",
-            "change": "1.26"
+            "price": "0.152",
+            "change": "1.21"
         },
         {
             "symbol": "NZD",
-            "price": "28.1057",
-            "change": "0.54"
+            "price": "28.0956",
+            "change": "0.5"
         },
         {
             "symbol": "BRL",
-            "price": "9.3651",
-            "change": "0.49"
+            "price": "9.3637",
+            "change": "0.47"
         },
         {
             "symbol": "IDR",
             "price": "0.0027",
-            "change": "0.82"
+            "change": "0.81"
         },
         {
             "symbol": "CZK",
-            "price": "2.277",
-            "change": "0.6"
+            "price": "2.2733",
+            "change": "0.43"
         },
         {
             "symbol": "PLN",
-            "price": "12.8506",
-            "change": "0.76"
+            "price": "12.8357",
+            "change": "0.64"
         },
         {
             "symbol": "RON",
-            "price": "10.5249",
-            "change": "0.78"
+            "price": "10.5105",
+            "change": "0.6"
         },
         {
             "symbol": "CNY",
-            "price": "7.0764",
-            "change": "0.29"
+            "price": "7.0754",
+            "change": "0.27"
         },
         {
             "symbol": "ARS",
-            "price": "0.0319",
-            "change": "0.32"
+            "price": "0.0318",
+            "change": "0.22"
         },
         {
             "symbol": "ALL",
-            "price": "0.5926",
-            "change": "0.69"
+            "price": "0.5922",
+            "change": "0.62"
         },
         {
             "symbol": "AZN",
-            "price": "28.0627",
+            "price": "28.0642",
             "change": "0.17"
         },
         {
             "symbol": "BAM",
-            "price": "28.1206",
+            "price": "28.1221",
             "change": "-1.14"
         },
         {
             "symbol": "CLP",
-            "price": "0.0525",
-            "change": "1.01"
+            "price": "0.0523",
+            "change": "0.6"
         },
         {
             "symbol": "COP",
@@ -194,23 +194,23 @@
         },
         {
             "symbol": "HKD",
-            "price": "6.081",
+            "price": "6.0811",
             "change": "0.16"
         },
         {
             "symbol": "ISK",
             "price": "0.3867",
-            "change": "0.34"
+            "change": "0.35"
         },
         {
             "symbol": "KRW",
-            "price": "0.0339",
-            "change": "1.26"
+            "price": "0.0338",
+            "change": "1.12"
         },
         {
             "symbol": "KZT",
-            "price": "0.1018",
-            "change": "0.14"
+            "price": "0.1019",
+            "change": "0.2"
         },
         {
             "symbol": "LBP",
@@ -224,18 +224,18 @@
         },
         {
             "symbol": "MAD",
-            "price": "5.1203",
-            "change": "0.31"
+            "price": "5.1188",
+            "change": "0.28"
         },
         {
             "symbol": "MDL",
-            "price": "2.7495",
+            "price": "2.7496",
             "change": "0.06"
         },
         {
             "symbol": "MKD",
-            "price": "0.8969",
-            "change": "0.39"
+            "price": "0.8963",
+            "change": "0.32"
         },
         {
             "symbol": "MYR",
@@ -244,18 +244,18 @@
         },
         {
             "symbol": "OMR",
-            "price": "124.0776",
+            "price": "124.0809",
             "change": "0.17"
         },
         {
             "symbol": "PEN",
-            "price": "14.0894",
+            "price": "14.0901",
             "change": "-0.04"
         },
         {
             "symbol": "PHP",
-            "price": "0.7852",
-            "change": "0.21"
+            "price": "0.7844",
+            "change": "0.11"
         },
         {
             "symbol": "PKR",
@@ -264,38 +264,38 @@
         },
         {
             "symbol": "QAR",
-            "price": "13.534",
+            "price": "13.5335",
             "change": "0.18"
         },
         {
             "symbol": "RSD",
-            "price": "0.4713",
-            "change": "0.47"
+            "price": "0.4707",
+            "change": "0.36"
         },
         {
             "symbol": "SGD",
-            "price": "37.335",
-            "change": "0.62"
+            "price": "37.3165",
+            "change": "0.57"
         },
         {
             "symbol": "SYP",
-            "price": "0.3909",
+            "price": "0.391",
             "change": "0.14"
         },
         {
             "symbol": "THB",
-            "price": "1.4494",
-            "change": "0.81"
+            "price": "1.4472",
+            "change": "0.65"
         },
         {
             "symbol": "TWD",
-            "price": "1.4811",
-            "change": "0.29"
+            "price": "1.4798",
+            "change": "0.2"
         },
         {
             "symbol": "UAH",
-            "price": "1.066",
-            "change": "0.08"
+            "price": "1.0657",
+            "change": "0.05"
         },
         {
             "symbol": "UYU",
@@ -304,12 +304,12 @@
         },
         {
             "symbol": "GEL",
-            "price": "18.2434",
+            "price": "18.2444",
             "change": "2.85"
         },
         {
             "symbol": "TND",
-            "price": "16.2433",
+            "price": "16.2442",
             "change": "0"
         },
         {
@@ -320,57 +320,57 @@
         {
             "symbol": "VND",
             "price": "0.0018",
-            "change": "0.45"
+            "change": "0.47"
         },
         {
             "symbol": "GRAMALTIN",
-            "price": "6681.47",
-            "change": "2.91"
+            "price": "6661.98",
+            "change": "2.61"
         },
         {
             "symbol": "XU100",
-            "price": "13778",
-            "change": "-0.15"
+            "price": "13741.01",
+            "change": "-0.42"
         },
         {
             "symbol": "DBITCOIN",
             "price": "0",
-            "change": "1.2"
+            "change": "1.07"
         },
         {
             "symbol": "GUMUS",
-            "price": "98.56",
-            "change": "4.61"
+            "price": "97.68",
+            "change": "3.68"
         },
         {
             "symbol": "BRENT",
             "price": "0",
-            "change": "-0.38"
+            "change": "0.05"
         },
         {
             "symbol": "ONS",
             "price": "0",
-            "change": "2.74"
+            "change": "2.44"
         },
         {
             "symbol": "GRAMHASALTIN",
-            "price": "6648.06",
-            "change": "2.91"
+            "price": "6628.67",
+            "change": "2.61"
         },
         {
             "symbol": "CEYREKALTIN",
-            "price": "10934.55",
-            "change": "2.53"
+            "price": "10887.46",
+            "change": "2.09"
         },
         {
             "symbol": "YARIMALTIN",
-            "price": "21869.11",
-            "change": "2.53"
+            "price": "21774.91",
+            "change": "2.09"
         },
         {
             "symbol": "TAMALTIN",
-            "price": "43604.46",
-            "change": "2.53"
+            "price": "43416.64",
+            "change": "2.09"
         },
         {
             "symbol": "CUMHURIYETALTINI",
@@ -379,58 +379,58 @@
         },
         {
             "symbol": "ATAALTIN",
-            "price": "45209.53",
-            "change": "2.53"
+            "price": "45014.8",
+            "change": "2.09"
         },
         {
             "symbol": "14AYARALTIN",
-            "price": "3812.05",
-            "change": "2.53"
+            "price": "3795.63",
+            "change": "2.09"
         },
         {
             "symbol": "18AYARALTIN",
-            "price": "4882.09",
-            "change": "2.53"
+            "price": "4861.07",
+            "change": "2.09"
         },
         {
             "symbol": "22AYARBILEZIK",
-            "price": "6099.27",
-            "change": "2.53"
+            "price": "6073",
+            "change": "2.09"
         },
         {
             "symbol": "IKIBUCUKALTIN",
-            "price": "108609.87",
-            "change": "2.53"
+            "price": "108142.06",
+            "change": "2.09"
         },
         {
             "symbol": "BESLIALTIN",
-            "price": "220697.4",
-            "change": "2.53"
+            "price": "219746.8",
+            "change": "2.09"
         },
         {
             "symbol": "GREMSEALTIN",
-            "price": "109345.53",
-            "change": "2.53"
+            "price": "108874.55",
+            "change": "2.09"
         },
         {
             "symbol": "RESATALTIN",
-            "price": "45209.53",
-            "change": "2.53"
+            "price": "45014.8",
+            "change": "2.09"
         },
         {
             "symbol": "HAMITALTIN",
-            "price": "45209.53",
-            "change": "2.53"
+            "price": "45014.8",
+            "change": "2.09"
         },
         {
             "symbol": "GRAMPLATIN",
-            "price": "2697.62",
-            "change": "1.39"
+            "price": "2686.13",
+            "change": "0.96"
         },
         {
             "symbol": "GRAMPALADYUM",
-            "price": "2122.25",
-            "change": "1.15"
+            "price": "2117.52",
+            "change": "0.89"
         }
     ]
 }

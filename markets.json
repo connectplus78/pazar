@@ -1,6 +1,6 @@
 {
-    "last_update": "2026-08-08 16:54:01",
-    "son_güncelleme": "2026-08-08 16:54:01",
+    "last_update": "2026-08-08 17:24:01",
+    "son_güncelleme": "2026-08-08 17:24:01",
     "items": [
         {
             "symbol": "USD",
@@ -335,7 +335,7 @@
         {
             "symbol": "DBITCOIN",
             "price": "0",
-            "change": "-0.21"
+            "change": "0.01"
         },
         {
             "symbol": "GUMUS",
